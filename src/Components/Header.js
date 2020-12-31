@@ -92,11 +92,15 @@ export default () => {
           <SLink to="/write">
             <MoreItem>새 글 작성</MoreItem>
           </SLink>
-          <MoreItem>임시 글</MoreItem>
+          <SLink to="/write">
+            <MoreItem>임시 저장</MoreItem>
+          </SLink>
           <SLink to="/settings">
             <MoreItem>설정</MoreItem>
           </SLink>
-          <MoreItem>로그아웃</MoreItem>
+          <SLink to="/write">
+            <MoreItem>로그아웃</MoreItem>
+          </SLink>
         </MoreList>
       </Column>
     </Container>
