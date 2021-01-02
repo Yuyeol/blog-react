@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Profile = styled.div`
   display: flex;
   padding: 40px 0;
-  border-bottom: 1.5px solid rgba(118, 146, 180, 0.3);
+  border-bottom: 1.5px solid rgba(16, 24, 32, 0.15);
 `;
 const PictureBox = styled.div`
   margin-right: 50px;
@@ -32,7 +32,8 @@ const EditProfile = styled.div`
   align-items: center;
   padding: 4px 8px;
   border-radius: 10px;
-  border: 3px solid rgba(118, 146, 180, 0.5);
+  font-weight: 600;
+  border: 3px solid rgba(16, 24, 32, 0.15);
 `;
 const StatusBox = styled.div`
   display: flex;

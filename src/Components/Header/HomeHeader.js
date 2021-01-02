@@ -4,15 +4,9 @@ import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const Container = styled.header`
-  position: fixed;
-  top: 0;
-  width: 100%;
+const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
-  box-shadow: 2px 5px 5px rgba(118, 146, 180, 0.15);
-  background-color: rgba(255, 255, 255, 0.8);
 `;
 const Column = styled.div`
   display: flex;
@@ -58,11 +52,14 @@ const MoreList = styled.div`
 `;
 const MoreItem = styled.div`
   font-size: 28px;
+`;
+const HomeLink = styled(Link)``;
+const MoreLink = styled(Link)`
+  display: block;
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 `;
-const SLink = styled(Link)``;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -76,10 +73,12 @@ export default () => {
   };
   return (
     <Container>
-      <Column>
-        <Home src="https://pbs.twimg.com/profile_images/1228368893321736193/Ov0og7E8_400x400.jpg" />
-        <ID>URE's Blog</ID>
-      </Column>
+      <HomeLink to="/">
+        <Column>
+          <Home src="https://postfiles.pstatic.net/MjAyMTAxMDJfNyAg/MDAxNjA5NTc1Mzk4Nzcz.hcximGHvyLHxZESnobyXlzTSAd-H7EC3X6gC5-60Gj8g.gzM5FqzaF1wbA14RX9GcN0gAwo8bn_q4jCkaeEsqTrkg.PNG.uy23/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.png?type=w773" />
+          <ID>URE's Blog</ID>
+        </Column>
+      </HomeLink>
       <Column>
         <Search>
           <ImSearch />
@@ -89,18 +88,18 @@ export default () => {
           <AiFillCaretDown />
         </More>
         <MoreList active={!moreOpen}>
-          <SLink to="/write">
-            <MoreItem>새 글 작성</MoreItem>
-          </SLink>
-          <SLink to="/write">
-            <MoreItem>임시 저장</MoreItem>
-          </SLink>
-          <SLink to="/settings">
+          <MoreLink to="/write">
+            <MoreItem>새 글 쓰기</MoreItem>
+          </MoreLink>
+          <MoreLink to="/write">
+            <MoreItem>임시 저장함</MoreItem>
+          </MoreLink>
+          <MoreLink to="/settings">
             <MoreItem>설정</MoreItem>
-          </SLink>
-          <SLink to="/write">
+          </MoreLink>
+          <MoreLink to="/write">
             <MoreItem>로그아웃</MoreItem>
-          </SLink>
+          </MoreLink>
         </MoreList>
       </Column>
     </Container>

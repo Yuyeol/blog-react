@@ -1,5 +1,6 @@
-import Category from "Components/Category";
-import Profile from "Components/Profile";
+import BlankBoard from "Components/Home/BlankBoard";
+import Category from "Components/Home/Category";
+import Profile from "Components/Home/Profile";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -11,5 +12,6 @@ export default () => (
   <Container>
     <Profile />
     <Category />
+    <BlankBoard />
   </Container>
 );
