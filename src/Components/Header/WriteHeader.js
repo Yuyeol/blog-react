@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Container = styled.header``;
 const BtnBox = styled.div`
@@ -12,7 +13,7 @@ const BtnBox = styled.div`
   padding: 15px 0;
 `;
 const SubmitBox = styled.div``;
-const ExitLabel = styled.label`
+const ExitLabel = styled.div`
   cursor: pointer;
 `;
 const SaveLabel = styled.label`
@@ -33,15 +34,13 @@ const PublishLabel = styled.label`
   font-weight: 600;
   cursor: pointer;
 `;
-const Exit = styled.button`
-  display: none;
-`;
 const Save = styled.button`
   display: none;
 `;
 const Publish = styled.button`
   display: none;
 `;
+const HomeLink = styled(Link)``;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -58,10 +57,11 @@ export default () => {
         
         */}
       <BtnBox>
-        <ExitLabel htmlFor="exit">
-          <AiOutlineArrowLeft /> 나가기
-        </ExitLabel>
-        <Exit id="exit" />
+        <HomeLink to="/">
+          <ExitLabel>
+            <AiOutlineArrowLeft /> 나가기
+          </ExitLabel>
+        </HomeLink>
         <SubmitBox>
           <SaveLabel htmlFor="save">임시저장</SaveLabel>
           <Save id="save" />

@@ -16,7 +16,6 @@ const Picture = styled.img`
 const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 const NicknameBox = styled.div`
   display: flex;
@@ -78,7 +77,13 @@ export default () => (
           <StatusValue>17</StatusValue>
         </Status>
       </StatusBox>
-      <Intro>URE의 블로그입니다.</Intro>
+      <Intro>
+        URE의 블로그입니다.
+        <br />
+        URE의 블로그입니다.
+        <br />
+        ...더보기 기능 추가
+      </Intro>
     </InfoColumn>
   </Profile>
 );

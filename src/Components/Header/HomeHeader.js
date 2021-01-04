@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 const Column = styled.div`
@@ -75,7 +76,7 @@ export default () => {
     <Container>
       <HomeLink to="/">
         <Column>
-          <Home src="https://postfiles.pstatic.net/MjAyMTAxMDJfNyAg/MDAxNjA5NTc1Mzk4Nzcz.hcximGHvyLHxZESnobyXlzTSAd-H7EC3X6gC5-60Gj8g.gzM5FqzaF1wbA14RX9GcN0gAwo8bn_q4jCkaeEsqTrkg.PNG.uy23/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.png?type=w773" />
+          <Home src="https://postfiles.pstatic.net/MjAyMTAxMDRfMTYx/MDAxNjA5NzQ3NTY4OTYy.HGoHVtVfo3EF5VJJaxTO2w40BkHhmq2msClcmLnEtAsg.EOMyy5P1sU4Mul7jx-Z2Q-0uZs74Sjq3e7oxi0OM5Qgg.PNG.uy23/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.png?type=w773" />
           <ID>URE's Blog</ID>
         </Column>
       </HomeLink>
