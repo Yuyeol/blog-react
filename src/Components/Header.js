@@ -3,8 +3,15 @@ import React, { useState } from "react";
 import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 30px;
+  box-shadow: 2px 5px 5px rgba(16, 24, 32, 0.15);
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,17 +70,13 @@ const MoreLink = styled(Link)`
 `;
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+export default withRouter(({ location: { pathname } }) => {
   const [moreOpen, setMoreOpen] = useState(false);
-  const handleMore = () => {
-    if (moreOpen) {
-      setMoreOpen(false);
-    } else {
-      setMoreOpen(true);
-    }
+  const toggleMore = () => {
+    setMoreOpen(!moreOpen);
   };
   return (
-    <Container>
+    <Container active={pathname !== "/write"}>
       <HomeLink to="/">
         <Column>
           <Home src="https://postfiles.pstatic.net/MjAyMTAxMDRfMTYx/MDAxNjA5NzQ3NTY4OTYy.HGoHVtVfo3EF5VJJaxTO2w40BkHhmq2msClcmLnEtAsg.EOMyy5P1sU4Mul7jx-Z2Q-0uZs74Sjq3e7oxi0OM5Qgg.PNG.uy23/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.png?type=w773" />
@@ -84,25 +87,27 @@ export default () => {
         <Search>
           <ImSearch />
         </Search>
-        <More onClick={handleMore}>
+        <More onClick={toggleMore}>
           <User src="https://media.vlpt.us/images/juy23/profile/ed48f224-7e9f-4eb8-9dbc-e5d857fd3b66/social.png?w=120" />
           <AiFillCaretDown />
         </More>
-        <MoreList active={!moreOpen}>
-          <MoreLink to="/write">
-            <MoreItem>새 글 쓰기</MoreItem>
-          </MoreLink>
-          <MoreLink to="/write">
-            <MoreItem>임시 저장함</MoreItem>
-          </MoreLink>
-          <MoreLink to="/settings">
-            <MoreItem>설정</MoreItem>
-          </MoreLink>
-          <MoreLink to="/write">
-            <MoreItem>로그아웃</MoreItem>
-          </MoreLink>
-        </MoreList>
+        {moreOpen && (
+          <MoreList>
+            <MoreLink to="/write">
+              <MoreItem>새 글 쓰기</MoreItem>
+            </MoreLink>
+            <MoreLink to="/write">
+              <MoreItem>임시 저장함</MoreItem>
+            </MoreLink>
+            <MoreLink to="/settings">
+              <MoreItem>설정</MoreItem>
+            </MoreLink>
+            <MoreLink to="/write">
+              <MoreItem>로그아웃</MoreItem>
+            </MoreLink>
+          </MoreList>
+        )}
       </Column>
     </Container>
   );
-};
+});

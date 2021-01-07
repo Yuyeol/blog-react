@@ -17,7 +17,7 @@ const SLink = styled(Link)``;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => (
-  <SLink to="/Write">
+  <SLink to="/write">
     <Write>
       <RiQuillPenLine />새 글 쓰기
     </Write>
