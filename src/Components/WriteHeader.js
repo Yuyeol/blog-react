@@ -8,17 +8,19 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  padding: 30px;
+  padding: 18px;
   box-shadow: 2px 5px 5px rgba(16, 24, 32, 0.15);
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 30px;
+  font-size: 24px;
+  z-index: 1;
 `;
 const SubmitBox = styled.div``;
 const ExitLabel = styled.div`
   cursor: pointer;
+  font-weight: 600;
 `;
 const SaveLabel = styled.label`
   margin-left: 15px;

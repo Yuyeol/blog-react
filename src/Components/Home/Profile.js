@@ -2,16 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Profile = styled.div`
-  display: flex;
-  padding: 40px 0;
   border-bottom: 1.5px solid rgba(16, 24, 32, 0.15);
 `;
 const PictureBox = styled.div`
-  margin-right: 50px;
+  display: flex;
+  justify-content: center;
 `;
 const Picture = styled.img`
-  width: 150px;
-  border-radius: 50%;
+  width: 220px;
 `;
 const InfoColumn = styled.div`
   display: flex;
@@ -34,19 +32,6 @@ const EditProfile = styled.div`
   font-weight: 600;
   border: 3px solid rgba(16, 24, 32, 0.15);
 `;
-const StatusBox = styled.div`
-  display: flex;
-  margin: 15px 0;
-`;
-const Status = styled.div`
-  margin-right: 10px;
-  text-align: center;
-`;
-const StatusItem = styled.div`
-  font-weight: 600;
-  margin-bottom: 5px;
-`;
-const StatusValue = styled.div``;
 const Intro = styled.div``;
 const SLink = styled(Link)``;
 
@@ -63,20 +48,6 @@ export default () => (
           <EditProfile>설정</EditProfile>
         </SLink>
       </NicknameBox>
-      <StatusBox>
-        <Status>
-          <StatusItem>게시글</StatusItem>
-          <StatusValue>5</StatusValue>
-        </Status>
-        <Status>
-          <StatusItem>일 방문자</StatusItem>
-          <StatusValue>1</StatusValue>
-        </Status>
-        <Status>
-          <StatusItem>총 방문자</StatusItem>
-          <StatusValue>17</StatusValue>
-        </Status>
-      </StatusBox>
       <Intro>
         URE의 블로그입니다.
         <br />

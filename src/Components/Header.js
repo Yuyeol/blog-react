@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const Container = styled.div`
   padding: 15px 30px;
   box-shadow: 2px 5px 5px rgba(16, 24, 32, 0.15);
   background-color: rgba(255, 255, 255, 0.8);
-  display: flex;
+  display: ${(props) => (props.active ? "flex" : "none")};
   align-items: center;
   justify-content: space-between;
 `;
@@ -24,7 +24,7 @@ const Home = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 5px;
-  margin-right: 20px;
+  margin-right: 15px;
 `;
 const ID = styled.div`
   font-size: 30px;
@@ -33,8 +33,8 @@ const Search = styled.div`
   font-size: 30px;
 `;
 const User = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   margin: 0 20px;
 `;
@@ -53,13 +53,13 @@ const MoreList = styled.div`
   width: 200px;
   padding: 10px;
   position: absolute;
-  top: 80px;
-  right: 31px;
+  top: 60px;
+  right: 28px;
   box-shadow: 1.5px 1.5px 1.5px 1.5px rgba(118, 146, 180, 0.15);
   border: 1.5px solid rgba(118, 146, 180, 0.15);
 `;
 const MoreItem = styled.div`
-  font-size: 28px;
+  font-size: 20px;
 `;
 const HomeLink = styled(Link)``;
 const MoreLink = styled(Link)`
@@ -72,9 +72,19 @@ const MoreLink = styled(Link)`
 // eslint-disable-next-line import/no-anonymous-default-export
 export default withRouter(({ location: { pathname } }) => {
   const [moreOpen, setMoreOpen] = useState(false);
+  const more = useRef(null);
   const toggleMore = () => {
     setMoreOpen(!moreOpen);
   };
+  const handleClickOutside = ({ target }) => {
+    if (more && !more.current.contains(target)) setMoreOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <Container active={pathname !== "/write"}>
       <HomeLink to="/">
@@ -87,26 +97,26 @@ export default withRouter(({ location: { pathname } }) => {
         <Search>
           <ImSearch />
         </Search>
-        <More onClick={toggleMore}>
+        <More onClick={toggleMore} ref={more}>
           <User src="https://media.vlpt.us/images/juy23/profile/ed48f224-7e9f-4eb8-9dbc-e5d857fd3b66/social.png?w=120" />
           <AiFillCaretDown />
+          {moreOpen && (
+            <MoreList>
+              <MoreLink to="/write">
+                <MoreItem>새 글 쓰기</MoreItem>
+              </MoreLink>
+              <MoreLink to="/write">
+                <MoreItem>임시 저장함</MoreItem>
+              </MoreLink>
+              <MoreLink to="/settings">
+                <MoreItem>설정</MoreItem>
+              </MoreLink>
+              <MoreLink to="/write">
+                <MoreItem>로그아웃</MoreItem>
+              </MoreLink>
+            </MoreList>
+          )}
         </More>
-        {moreOpen && (
-          <MoreList>
-            <MoreLink to="/write">
-              <MoreItem>새 글 쓰기</MoreItem>
-            </MoreLink>
-            <MoreLink to="/write">
-              <MoreItem>임시 저장함</MoreItem>
-            </MoreLink>
-            <MoreLink to="/settings">
-              <MoreItem>설정</MoreItem>
-            </MoreLink>
-            <MoreLink to="/write">
-              <MoreItem>로그아웃</MoreItem>
-            </MoreLink>
-          </MoreList>
-        )}
       </Column>
     </Container>
   );

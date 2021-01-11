@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import HTMLReactParser from "html-react-parser";
 
 const Container = styled.div`
   padding: 50px 0;
   border-bottom: 1.5px solid rgba(16, 24, 32, 0.15);
+  background-color: red;
 `;
 const PictureBox = styled.div``;
 const Picture = styled.img`
@@ -13,10 +15,7 @@ const Title = styled.div`
   font-size: 40px;
   margin: 15px 0;
 `;
-const Contents = styled.div`
-  font-size: 24px;
-  line-height: 1.5;
-`;
+const Contents = styled.div``;
 const StatusBox = styled.div`
   margin-top: 15px;
   display: flex;
@@ -36,7 +35,7 @@ export default ({ title, contents, imgURL, date, like, comments }) => {
         <Picture src={imgURL} />
       </PictureBox>
       <Title>{title}</Title>
-      <Contents>{contents}</Contents>
+      <Contents>{HTMLReactParser(contents)}</Contents>
       <StatusBox>
         <Date>{date}</Date>
         <Dot>•</Dot>

@@ -1,38 +1,58 @@
 import styled from "styled-components";
-
-import { useState } from "react";
+import "codemirror/lib/codemirror.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+import { useRef, useState } from "react";
 import { useDispatch } from "context";
-import WriteHeader from "Components/Write/WriteHeader";
-import WriteForm from "Components/Write/WriteForm";
+import WriteHeader from "Components/WriteHeader";
 import { CREATE } from "actions";
 
 const Container = styled.div`
   margin: 100px;
+  z-index: -1;
+`;
+const Title = styled.input`
+  font-size: 32px;
+  font-weight: 600;
+  border: none;
+  margin: 15px 0;
 `;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const [inputs, setInputs] = useState("");
-  const imgURL =
-    "https://media.vlpt.us/images/juy23/profile/ed48f224-7e9f-4eb8-9dbc-e5d857fd3b66/social.png?w=120";
-  const date = "2021년 1월 5일";
-  const like = "3";
-  const comments = "1";
+  // const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
   const dispatch = useDispatch();
-  const handleInputs = (e) => {
-    const { value, name } = e.target;
-    setInputs({ ...inputs, [name]: value });
-  };
-  const handleSubmit = (e) => {
+  const editorRef = useRef(null);
+  const handleSubmit = () => {
     dispatch({
       type: CREATE,
-      payload: { inputs, imgURL, date, like, comments },
+      payload: { title, contents },
     });
   };
+
+  const handleTitle = (e) => {
+    const title = e.target.value;
+    setTitle(title);
+  };
+  const handleContents = () => {
+    const contents = editorRef.current.getInstance().getHtml();
+    setContents(contents);
+  };
+
   return (
     <Container>
       <WriteHeader handleSubmit={handleSubmit} />
-      <WriteForm handleInputs={handleInputs} />
+      <Title placeholder="제목" onChange={handleTitle} />
+      <Editor
+        previewStyle="vertical"
+        height="70vh"
+        initialEditType="wysiwyg"
+        placeholder="글쓰기"
+        onChange={handleContents}
+        ref={editorRef}
+      />
     </Container>
   );
 };
