@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import HTMLReactParser from "html-react-parser";
+import { PINK } from "styles";
 
 const Container = styled.div`
-  padding: 50px 0;
-  border-bottom: 1.5px solid rgba(16, 24, 32, 0.15);
+  padding: 20px;
+  border: 2px solid ${PINK};
+  width: 100%;
 `;
 const Title = styled.div`
   font-weight: 600;

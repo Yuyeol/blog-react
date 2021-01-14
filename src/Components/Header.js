@@ -10,11 +10,12 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   padding: 15px 30px;
-  box-shadow: 2px 5px 5px rgba(16, 24, 32, 0.15);
+  box-shadow: 2px 5px 5px #f4efea;
   background-color: rgba(255, 255, 255, 0.8);
   display: ${(props) => (props.active ? "flex" : "none")};
   align-items: center;
   justify-content: space-between;
+  z-index: 10;
 `;
 const Column = styled.div`
   display: flex;
@@ -55,8 +56,8 @@ const MoreList = styled.div`
   position: absolute;
   top: 60px;
   right: 28px;
-  box-shadow: 1.5px 1.5px 1.5px 1.5px rgba(118, 146, 180, 0.15);
-  border: 1.5px solid rgba(118, 146, 180, 0.15);
+  box-shadow: 1.5px 1.5px 1.5px 1.5px #f4efea;
+  border: 1.5px solid #f4efea;
 `;
 const MoreItem = styled.div`
   font-size: 20px;
@@ -89,7 +90,7 @@ export default withRouter(({ location: { pathname } }) => {
     <Container active={pathname !== "/write"}>
       <HomeLink to="/">
         <Column>
-          <Home src="https://postfiles.pstatic.net/MjAyMTAxMDRfMTYx/MDAxNjA5NzQ3NTY4OTYy.HGoHVtVfo3EF5VJJaxTO2w40BkHhmq2msClcmLnEtAsg.EOMyy5P1sU4Mul7jx-Z2Q-0uZs74Sjq3e7oxi0OM5Qgg.PNG.uy23/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.png?type=w773" />
+          <Home src="https://postfiles.pstatic.net/MjAyMTAxMTRfNDgg/MDAxNjEwNjI0OTc0NTQ3.LFXxoaV7puk7BO0LkL7xroaILMq-BKBd-ykYuMUq5Ycg.ijYSXkw8ZIqJHda-yXehLzGoQqFn8tN8H4Xfa3r2BvMg.PNG.uy23/%EB%A1%9C%EA%B3%A0.png?type=w773" />
           <ID>URE's Blog</ID>
         </Column>
       </HomeLink>
@@ -98,7 +99,7 @@ export default withRouter(({ location: { pathname } }) => {
           <ImSearch />
         </Search>
         <More onClick={toggleMore} ref={more}>
-          <User src="https://media.vlpt.us/images/juy23/profile/ed48f224-7e9f-4eb8-9dbc-e5d857fd3b66/social.png?w=120" />
+          <User src="https://postfiles.pstatic.net/MjAyMTAxMTRfODMg/MDAxNjEwNjI3NTM5NTkx.mqpu51ehbti6TDQotTRu8RgduRxkMN_mdDfENma2aZ0g.rbt0Y7bCruFhKojnJyQVZFfi020qFMo9niFkR1T0ktog.PNG.uy23/brennan-ehrhardt-HALe2SmkWAI-unsplash.png?type=w773" />
           <AiFillCaretDown />
           {moreOpen && (
             <MoreList>

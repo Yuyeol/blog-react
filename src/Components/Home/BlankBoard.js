@@ -2,27 +2,29 @@ import styled from "styled-components";
 import WriteBtn from "./WriteBtn";
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 500px;
+  border: 2px solid #f4efea;
 `;
 const TextBox = styled.div`
   text-align: center;
 `;
 const BigText = styled.div`
-  font-size: 36px;
-  color: #1a7a4c;
+  font-size: 32px;
+  color: #9a161f;
 `;
 const Text = styled.div`
-  font-size: 28px;
+  font-size: 24px;
   margin-top: 10px;
 `;
 const WriteBox = styled.div`
-  margin: 15px 0;
-  width: 300px;
-  font-size: 36px;
+  margin: 20px 0;
+  width: 250px;
+  font-size: 28px;
 `;
 
 // eslint-disable-next-line import/no-anonymous-default-export

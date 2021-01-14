@@ -4,11 +4,8 @@ import Profile from "./Profile";
 import WriteBtn from "./WriteBtn";
 
 const Container = styled.div`
-  position: absolute;
-  left: 100px;
-  top: 100px;
   width: 300px;
-  padding: 0px 40px;
+  padding-right: 10px;
 `;
 const Write = styled.div`
   margin: 15px 0;
@@ -28,7 +25,7 @@ const Title = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1.5px solid rgba(16, 24, 32, 0.15);
+  border-bottom: 1.5px solid #9a161f;
 `;
 const Item = styled.div``;
 // eslint-disable-next-line import/no-anonymous-default-export

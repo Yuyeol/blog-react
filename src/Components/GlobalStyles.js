@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { PINK } from "styles";
 
 const GlobalStyles = createGlobalStyle`
     a{
@@ -13,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
         margin:0;
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         color: rgb(16, 24, 32);
+        background-color:${PINK}
     }
 `;
 

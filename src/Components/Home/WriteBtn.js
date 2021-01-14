@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RiQuillPenLine } from "react-icons/ri";
+import { BLACK, PINK, RED } from "styles";
 
 const Write = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
-  background-color: #1a7a4c;
+  color: ${PINK};
+  background: linear-gradient(to top, ${RED}, #d2434d);
+  box-shadow: 2px 2px 2px 2px #f4efea;
   padding: 10px 0px;
-  border-radius: 1000px;
+  border-radius: 10px;
   font-weight: 600;
 `;
 const SLink = styled(Link)``;
