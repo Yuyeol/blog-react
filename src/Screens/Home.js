@@ -1,6 +1,5 @@
 import styled from "styled-components";
 // import BlankBoard from "Components/Home/BlankBoard";
-import Profile from "Components/Home/Profile";
 import PostL from "Components/Home/PostL";
 import { useState } from "context";
 import BlankBoard from "Components/Home/BlankBoard";
