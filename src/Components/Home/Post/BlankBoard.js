@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WriteBtn from "./WriteBtn";
+import WriteBtn from "../WriteBtn";
 
 const Container = styled.div`
   width: 100%;
@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 100vh;
   border: 2px solid #f4efea;
 `;
 const TextBox = styled.div`

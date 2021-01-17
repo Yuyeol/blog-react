@@ -1,6 +1,7 @@
 import { ImCog } from "react-icons/im";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { PROFILE } from "styles";
 
 const Profile = styled.div`
   border-bottom: 1.5px solid #f4efea;
@@ -40,7 +41,7 @@ const SLink = styled(Link)``;
 export default () => (
   <Profile>
     <PictureBox>
-      <Picture src="https://postfiles.pstatic.net/MjAyMTAxMTRfODMg/MDAxNjEwNjI3NTM5NTkx.mqpu51ehbti6TDQotTRu8RgduRxkMN_mdDfENma2aZ0g.rbt0Y7bCruFhKojnJyQVZFfi020qFMo9niFkR1T0ktog.PNG.uy23/brennan-ehrhardt-HALe2SmkWAI-unsplash.png?type=w773" />
+      <Picture src={PROFILE} />
     </PictureBox>
     <Info>
       <NicknameBox>

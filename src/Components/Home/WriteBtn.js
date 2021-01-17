@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RiQuillPenLine } from "react-icons/ri";
-import { BLACK, PINK, RED } from "styles";
+import { PINK, RED } from "styles";
 
 const Write = styled.div`
   display: flex;

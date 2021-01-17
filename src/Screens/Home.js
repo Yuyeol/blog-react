@@ -1,26 +1,22 @@
 import styled from "styled-components";
 // import BlankBoard from "Components/Home/BlankBoard";
-import PostL from "Components/Home/PostL";
 import { useState } from "context";
-import BlankBoard from "Components/Home/BlankBoard";
-import LeftBar from "Components/Home/LeftBar";
-import { RED } from "styles";
+import BlankBoard from "Components/Home/Post/BlankBoard";
+import PostL from "Components/Home/Post/PostL";
+import Category from "Components/Home/Category";
 
 const Container = styled.div`
-  height: 100vh;
   margin: 0px 140px;
   padding: 85px 10px 0 10px;
   background-color: white;
   display: flex;
   position: relative;
+  background-color: white;
 `;
-const RedLine = styled.div`
-  right: 0px;
-  top: 85px;
-  position: absolute;
+
+const PostBox = styled.div`
   width: 100%;
-  height: 3px;
-  background-color: ${RED};
+  height: 100vh;
 `;
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -29,23 +25,25 @@ export default () => {
   return (
     <Container>
       {/* <RedLine></RedLine> */}
-      <LeftBar />
-      {posts.length === 0 ? (
-        <BlankBoard />
-      ) : (
-        posts.map((post) => (
-          <PostL
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            contents={post.contents}
-            imgURL={post.imgURL}
-            date={post.date}
-            like={post.like}
-            comments={post.comments}
-          />
-        ))
-      )}
+      <Category />
+      <PostBox>
+        {posts.length === 0 ? (
+          <BlankBoard />
+        ) : (
+          posts.map((post) => (
+            <PostL
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              contents={post.contents}
+              imgURL={post.imgURL}
+              date={post.date}
+              like={post.like}
+              comments={post.comments}
+            />
+          ))
+        )}
+      </PostBox>
     </Container>
   );
 };

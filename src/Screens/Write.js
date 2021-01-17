@@ -4,15 +4,16 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { useRef, useState } from "react";
 import { useDispatch } from "context";
-import WriteHeader from "Components/WriteHeader";
 import { CREATE } from "actions";
+import WriteHeader from "Components/Home/Header/WriteHeader";
 
 const Container = styled.div`
-  margin: 100px;
+  padding: 100px;
   z-index: -1;
+  background-color: white;
 `;
 const Title = styled.input`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
   border: none;
   margin: 15px 0;
@@ -49,7 +50,7 @@ export default () => {
         previewStyle="vertical"
         height="70vh"
         initialEditType="wysiwyg"
-        placeholder="글쓰기"
+        placeholder="본문"
         onChange={handleContents}
         ref={editorRef}
       />
