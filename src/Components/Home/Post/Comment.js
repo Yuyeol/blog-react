@@ -45,6 +45,7 @@ const Submit = styled.input`
   padding: 2px 5px;
   font-weight: 600;
   margin-bottom: 5px;
+  cursor: pointer;
 `;
 
 const Comment = () => {

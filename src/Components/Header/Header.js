@@ -5,7 +5,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { PROFILE, LOGO } from "styles";
-import More from "./More";
+import HeaderMore from "./HeaderMore";
 
 const Container = styled.div`
   position: fixed;
@@ -49,6 +49,7 @@ const MoreBox = styled.div`
     color: black;
     transition: background-color 0.2s ease-in-out;
   }
+  cursor: pointer;
 `;
 const HomeLink = styled(Link)``;
 
@@ -60,7 +61,7 @@ export default withRouter(({ location: { pathname } }) => {
     setMoreOpen(!moreOpen);
   };
   const handleClickOutside = ({ target }) => {
-    if (more && !more.current.contains(target)) setMoreOpen(false);
+    if (more.current && !more.current.contains(target)) setMoreOpen(false);
   };
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
@@ -69,7 +70,7 @@ export default withRouter(({ location: { pathname } }) => {
     };
   }, []);
   return (
-    <Container active={pathname !== "/write"}>
+    <Container active={pathname === "/"}>
       <HomeLink to="/">
         <Column>
           <Home src={LOGO} />
@@ -83,7 +84,7 @@ export default withRouter(({ location: { pathname } }) => {
         <MoreBox onClick={toggleMore} ref={more}>
           <User src={PROFILE} />
           <AiFillCaretDown />
-          {moreOpen && <More />}
+          {moreOpen && <HeaderMore />}
         </MoreBox>
       </Column>
     </Container>

@@ -1,10 +1,11 @@
-import { useState } from "context";
+import { useContextState } from "context";
 import styled from "styled-components";
 import Profile from "./Profile";
 import WriteBtn from "./WriteBtn";
 
 const Container = styled.div`
   width: 300px;
+  height: 100vh;
   padding-right: 10px;
 `;
 const Write = styled.div`
@@ -30,7 +31,7 @@ const Title = styled.div`
 const Item = styled.div``;
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const { posts } = useState();
+  const { posts } = useContextState();
   return (
     <Container>
       <Profile />

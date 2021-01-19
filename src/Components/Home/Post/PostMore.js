@@ -5,11 +5,11 @@ import styled from "styled-components";
 const MoreList = styled.div`
   display: block;
   background-color: white;
-  width: 200px;
+  width: 80px;
   padding: 10px;
   position: absolute;
-  top: 60px;
-  right: 28px;
+  top: 30px;
+  right: -5px;
   box-shadow: 1.5px 1.5px 1.5px 1.5px #f4efea;
   border: 1.5px solid #f4efea;
 `;
@@ -23,23 +23,17 @@ const MoreLink = styled(Link)`
   }
 `;
 
-const More = () => {
+const PostMore = ({ id }) => {
   return (
     <MoreList>
-      <MoreLink to="/write">
-        <MoreItem>새 글 쓰기</MoreItem>
+      <MoreLink to={`/write/${id}`}>
+        <MoreItem>수정</MoreItem>
       </MoreLink>
-      <MoreLink to="/write">
-        <MoreItem>임시 저장함</MoreItem>
-      </MoreLink>
-      <MoreLink to="/settings">
-        <MoreItem>설정</MoreItem>
-      </MoreLink>
-      <MoreLink to="/write">
-        <MoreItem>로그아웃</MoreItem>
+      <MoreLink to="/">
+        <MoreItem>삭제</MoreItem>
       </MoreLink>
     </MoreList>
   );
 };
 
-export default More;
+export default PostMore;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { PINK, RED } from "styles";
 
 const Container = styled.div`
   position: fixed;
@@ -9,7 +10,7 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   padding: 18px;
-  box-shadow: 2px 5px 5px rgba(16, 24, 32, 0.15);
+  box-shadow: 2px 5px 5px ${PINK};
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
@@ -24,7 +25,7 @@ const ExitLabel = styled.div`
 `;
 const SaveLabel = styled.label`
   margin-left: 15px;
-  background-color: rgba(16, 24, 32, 0.1);
+  background-color: ${PINK};
   color: rgb(16, 24, 32);
   padding: 10px 20px;
   border-radius: 100px;
@@ -33,7 +34,7 @@ const SaveLabel = styled.label`
 `;
 const PublishLabel = styled.label`
   margin-left: 15px;
-  background-color: #1a7a4c;
+  background-color: ${RED};
   color: white;
   padding: 10px 20px;
   border-radius: 100px;
@@ -48,8 +49,7 @@ const Publish = styled.button`
 `;
 const HomeLink = styled(Link)``;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default ({ handleSubmit }) => {
+const WriteHeader = ({ handleSubmit, buttonName }) => {
   return (
     <Container>
       <HomeLink to="/">
@@ -61,10 +61,12 @@ export default ({ handleSubmit }) => {
         <SaveLabel htmlFor="save">임시저장</SaveLabel>
         <Save id="save" />
         <PublishLabel htmlFor="publish" onClick={handleSubmit}>
-          발행하기
+          {buttonName}
         </PublishLabel>
         <Publish id="publish" />
       </SubmitBox>
     </Container>
   );
 };
+
+export default WriteHeader;

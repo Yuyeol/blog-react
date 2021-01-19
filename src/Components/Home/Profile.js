@@ -10,7 +10,7 @@ const Profile = styled.div`
 const PictureBox = styled.div`
   display: flex;
   justify-content: center;
-  padding: 15px;
+  padding: 10px;
 `;
 const Picture = styled.img`
   width: 190px;

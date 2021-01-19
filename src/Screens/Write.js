@@ -3,9 +3,9 @@ import "codemirror/lib/codemirror.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { useRef, useState } from "react";
-import { useDispatch } from "context";
-import { CREATE } from "actions";
-import WriteHeader from "Components/Home/Header/WriteHeader";
+import { useContextDispatch, useContextState } from "context";
+import { CREATE, UPDATE } from "actions";
+import WriteHeader from "Components/Header/WriteHeader";
 
 const Container = styled.div`
   padding: 100px;
@@ -19,18 +19,36 @@ const Title = styled.input`
   margin: 15px 0;
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-  // const [title, setTitle] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const dispatch = useDispatch();
+const Write = ({
+  match: {
+    params: { id },
+  },
+}) => {
+  const { posts } = useContextState();
+  const findPost = posts.find((post) => post.id === id);
+
+  const [title, setTitle] = useState(findPost ? findPost.title : "");
+  const [contents, setContents] = useState(findPost ? findPost.contents : "");
+  const dispatch = useContextDispatch();
   const editorRef = useRef(null);
   const handleSubmit = () => {
-    dispatch({
-      type: CREATE,
-      payload: { title, contents },
-    });
+    if (findPost) {
+      dispatch({
+        type: UPDATE,
+        payload: {
+          id,
+          title,
+          contents,
+          like: findPost.like,
+          comments: findPost.comments,
+        },
+      });
+    } else {
+      dispatch({
+        type: CREATE,
+        payload: { title, contents },
+      });
+    }
   };
 
   const handleTitle = (e) => {
@@ -44,12 +62,16 @@ export default () => {
 
   return (
     <Container>
-      <WriteHeader handleSubmit={handleSubmit} />
-      <Title placeholder="제목" onChange={handleTitle} />
+      <WriteHeader
+        handleSubmit={handleSubmit}
+        buttonName={findPost ? "수정하기" : "발행하기"}
+      />
+      <Title placeholder="제목" onChange={handleTitle} value={title} />
       <Editor
         previewStyle="vertical"
         height="70vh"
         initialEditType="wysiwyg"
+        initialValue={contents}
         placeholder="본문"
         onChange={handleContents}
         ref={editorRef}
@@ -57,3 +79,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Write;

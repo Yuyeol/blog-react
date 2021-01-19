@@ -12,11 +12,11 @@ const PostsProvider = ({ children }) => {
   );
 };
 
-export const useDispatch = () => {
+export const useContextDispatch = () => {
   const { dispatch } = useContext(PostsContext);
   return dispatch;
 };
-export const useState = () => {
+export const useContextState = () => {
   const { state } = useContext(PostsContext);
   return state;
 };
