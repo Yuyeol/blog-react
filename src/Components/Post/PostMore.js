@@ -1,5 +1,7 @@
+import { useContextDispatch } from "context";
 import React from "react";
 import { Link } from "react-router-dom";
+import { DELETE } from "reducer";
 import styled from "styled-components";
 
 const MoreList = styled.div`
@@ -24,14 +26,19 @@ const MoreLink = styled(Link)`
 `;
 
 const PostMore = ({ id }) => {
+  const dispatch = useContextDispatch();
+  const handleDelete = () => {
+    dispatch({
+      type: DELETE,
+      payload: { id },
+    });
+  };
   return (
     <MoreList>
       <MoreLink to={`/write/${id}`}>
         <MoreItem>수정</MoreItem>
       </MoreLink>
-      <MoreLink to="/">
-        <MoreItem>삭제</MoreItem>
-      </MoreLink>
+      <MoreItem onClick={handleDelete}>삭제</MoreItem>
     </MoreList>
   );
 };

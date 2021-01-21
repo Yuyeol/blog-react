@@ -70,7 +70,7 @@ export default withRouter(({ location: { pathname } }) => {
     };
   }, []);
   return (
-    <Container active={pathname === "/"}>
+    <Container active={pathname.substring(0, 6) !== "/write"}>
       <HomeLink to="/">
         <Column>
           <Home src={LOGO} />

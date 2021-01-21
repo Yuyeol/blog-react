@@ -29,7 +29,7 @@ const HeaderMore = () => {
       <MoreLink to="/write">
         <MoreItem>새 글 쓰기</MoreItem>
       </MoreLink>
-      <MoreLink to="/write">
+      <MoreLink to="/saved">
         <MoreItem>임시 저장함</MoreItem>
       </MoreLink>
       <MoreLink to="/settings">

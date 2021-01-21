@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { PINK, RED } from "styles";
 
 const Container = styled.div`
@@ -47,21 +47,26 @@ const Save = styled.button`
 const Publish = styled.button`
   display: none;
 `;
-const HomeLink = styled(Link)``;
+const Exit = styled.span``;
 
-const WriteHeader = ({ handleSubmit, buttonName }) => {
+const WriteHeader = ({ history, handleSubmit, handleSave }) => {
+  const handleExit = () => {
+    history.goBack();
+  };
   return (
     <Container>
-      <HomeLink to="/">
+      <Exit onClick={handleExit}>
         <ExitLabel>
           <AiOutlineArrowLeft /> 나가기
         </ExitLabel>
-      </HomeLink>
+      </Exit>
       <SubmitBox>
-        <SaveLabel htmlFor="save">임시저장</SaveLabel>
+        <SaveLabel htmlFor="save" onClick={handleSave}>
+          임시저장
+        </SaveLabel>
         <Save id="save" />
         <PublishLabel htmlFor="publish" onClick={handleSubmit}>
-          {buttonName}
+          발행하기
         </PublishLabel>
         <Publish id="publish" />
       </SubmitBox>
@@ -69,4 +74,4 @@ const WriteHeader = ({ handleSubmit, buttonName }) => {
   );
 };
 
-export default WriteHeader;
+export default withRouter(WriteHeader);

@@ -1,6 +1,11 @@
 import { v4 as uuid } from "uuid";
-import { CREATE, UPDATE } from "actions";
 import moment from "moment";
+
+export const CREATE = "create";
+export const SAVE = "save";
+export const UPDATE = "update";
+export const DELETE = "delete";
+export const COMPLETE = "complete";
 
 export const initialState = {
   posts: [
@@ -11,6 +16,28 @@ export const initialState = {
     //   like: 0,
     //   comments: 0,
     // },
+  ],
+  saved: [
+    {
+      id: uuid(),
+      title: "1st",
+      contents: "contents",
+      date: moment().format("lll"),
+    },
+    {
+      id: uuid(),
+      title: "1st",
+      contents: "contents",
+      like: 0,
+      comments: 0,
+      date: moment().format("lll"),
+    },
+    {
+      id: uuid(),
+      title: "1st",
+      contents: "contents",
+      date: moment().format("lll"),
+    },
   ],
 };
 
@@ -31,6 +58,20 @@ const reducer = (state, action) => {
           },
         ],
       };
+    case SAVE:
+      const save = state.saved.filter((s) => s.id !== action.payload.id);
+      return {
+        ...state,
+        saved: [
+          ...save,
+          {
+            id: uuid(),
+            title: action.payload.title,
+            contents: action.payload.contents,
+            date: moment().format("lll"),
+          },
+        ],
+      };
     case UPDATE:
       const notUpdated = state.posts.filter(
         (post) => post.id !== action.payload.id
@@ -44,6 +85,28 @@ const reducer = (state, action) => {
             ...updated,
             title: action.payload.title,
             contents: action.payload.contents,
+          },
+        ],
+      };
+    case DELETE:
+      return {
+        ...state,
+        posts: state.posts.filter((p) => p.id !== action.payload.id),
+        saved: state.saved.filter((s) => s.id !== action.payload.id),
+      };
+    case COMPLETE:
+      return {
+        ...state,
+        saved: state.saved.filter((s) => s.id !== action.payload.id),
+        posts: [
+          ...state.posts,
+          {
+            id: uuid(),
+            title: action.payload.title,
+            contents: action.payload.contents,
+            date: moment().format("lll"),
+            like: 0,
+            comments: 0,
           },
         ],
       };

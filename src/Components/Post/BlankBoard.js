@@ -1,5 +1,5 @@
+import WriteBtn from "Components/Home/WriteBtn";
 import styled from "styled-components";
-import WriteBtn from "../WriteBtn";
 
 const Container = styled.div`
   width: 100%;

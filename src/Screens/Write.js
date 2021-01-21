@@ -4,8 +4,8 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { useRef, useState } from "react";
 import { useContextDispatch, useContextState } from "context";
-import { CREATE, UPDATE } from "actions";
 import WriteHeader from "Components/Header/WriteHeader";
+import { CREATE, COMPLETE, SAVE, UPDATE } from "reducer";
 
 const Container = styled.div`
   padding: 100px;
@@ -24,15 +24,27 @@ const Write = ({
     params: { id },
   },
 }) => {
-  const { posts } = useContextState();
-  const findPost = posts.find((post) => post.id === id);
-
-  const [title, setTitle] = useState(findPost ? findPost.title : "");
-  const [contents, setContents] = useState(findPost ? findPost.contents : "");
+  const { posts, saved } = useContextState();
   const dispatch = useContextDispatch();
   const editorRef = useRef(null);
+
+  // 수정하기에 해당되는 포스트 가져오기
+  const findPost = posts.find((p) => p.id === id);
+  const findSaved = saved.find((s) => s.id === id);
+
+  //포스트 종류 구분하여 데이터 받아오기 : title
+  const [title, setTitle] = useState(
+    findPost ? findPost.title : findSaved ? findSaved.title : ""
+  );
+  //포스트 종류 구분하여 데이터 받아오기 : contents
+  const [contents, setContents] = useState(
+    findPost ? findPost.contents : findSaved ? findSaved.contents : ""
+  );
+
+  // 발행하기 버튼
   const handleSubmit = () => {
     if (findPost) {
+      // Update Post
       dispatch({
         type: UPDATE,
         payload: {
@@ -44,8 +56,29 @@ const Write = ({
         },
       });
     } else {
+      // Create Post
+      if (findSaved) {
+        console.log("dsafwef");
+        dispatch({ type: COMPLETE, payload: { id, title, contents } });
+      } else {
+        dispatch({
+          type: CREATE,
+          payload: { title, contents },
+        });
+      }
+    }
+  };
+  // 임시저장 버튼
+  const handleSave = () => {
+    // Create SAVE
+    if (findSaved) {
       dispatch({
-        type: CREATE,
+        type: SAVE,
+        payload: { title, contents, id },
+      });
+    } else {
+      dispatch({
+        type: SAVE,
         payload: { title, contents },
       });
     }
@@ -62,10 +95,7 @@ const Write = ({
 
   return (
     <Container>
-      <WriteHeader
-        handleSubmit={handleSubmit}
-        buttonName={findPost ? "수정하기" : "발행하기"}
-      />
+      <WriteHeader handleSubmit={handleSubmit} handleSave={handleSave} />
       <Title placeholder="제목" onChange={handleTitle} value={title} />
       <Editor
         previewStyle="vertical"

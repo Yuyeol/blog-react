@@ -70,7 +70,7 @@ const Dot = styled.div`
 `;
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ id, title, contents, date, like, comments }) => {
+export default ({ post, saved }) => {
   const [moreOpen, setMoreOpen] = useState(false);
   const more = useRef(null);
   const toggleMore = () => {
@@ -101,26 +101,44 @@ export default ({ id, title, contents, date, like, comments }) => {
         <NickColumn>
           <NickImg src={PROFILE} />
           <Nick>URE</Nick>
-          <Date>{date}</Date>
+          <Date>
+            {post && post.date}
+            {saved && saved.date}
+          </Date>
         </NickColumn>
         <MoreBox onClick={toggleMore} ref={more}>
           <BsThreeDots />
-          {moreOpen && <PostMore id={id} />}
+          {/* 수정, 삭제하는곳 */}
+          {moreOpen && (
+            <PostMore id={(post && post.id) || (saved && saved.id)} />
+          )}
         </MoreBox>
       </PostHead>
-      <Title>{title}</Title>
-      <Contents>{HTMLReactParser(contents)}</Contents>
-      <StatusBox>
-        <StatusIcon onClick={handleHeart}>
-          {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
-        </StatusIcon>
-        <StatusIcon onClick={handleComment}>
-          <FaRegComment />
-        </StatusIcon>
-        <Like>{like > 0 && `좋아요 ${like}개`}</Like>
-        <Dot>{like && comments ? "•" : ""}</Dot>
-        <Comments>{comments > 0 && `댓글 ${comments}개`}</Comments>
-      </StatusBox>
+      <Title>
+        {post && post.title}
+        {saved && saved.title}
+      </Title>
+      <Contents>
+        {post && HTMLReactParser(post.contents)}
+        {saved && HTMLReactParser(saved.contents)}
+      </Contents>
+      {post && post && (
+        <StatusBox>
+          <StatusIcon onClick={handleHeart}>
+            {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
+          </StatusIcon>
+          <StatusIcon onClick={handleComment}>
+            <FaRegComment />
+          </StatusIcon>
+          <Like>
+            {post && post.like > 0 && `좋아요 ${post && post.like}개`}
+          </Like>
+          <Dot>{post && post.like && post && post.comments ? "•" : ""}</Dot>
+          <Comments>
+            {post && post.comments > 0 && `댓글 ${post && post.comments}개`}
+          </Comments>
+        </StatusBox>
+      )}
       {openComment && <Comment />}
     </Container>
   );

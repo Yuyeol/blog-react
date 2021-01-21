@@ -1,9 +1,9 @@
-import styled from "styled-components";
-// import BlankBoard from "Components/Home/BlankBoard";
-import { useContextState } from "context";
 import Category from "Components/Home/Category";
-import Post from "Components/Post/Post";
 import BlankBoard from "Components/Post/BlankBoard";
+import Post from "Components/Post/Post";
+import { useContextState } from "context";
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   margin: 0px 140px;
@@ -19,19 +19,20 @@ const PostBox = styled.div`
   height: 100%;
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-  const { posts } = useContextState();
+const Saved = () => {
+  const { saved } = useContextState();
   return (
     <Container>
       <Category />
       <PostBox>
-        {posts.length === 0 ? (
+        {saved.length === 0 ? (
           <BlankBoard />
         ) : (
-          posts.map((p) => <Post key={p.id} post={p} />)
+          saved.map((s) => <Post key={s.id} saved={s} />)
         )}
       </PostBox>
     </Container>
   );
 };
+
+export default Saved;
