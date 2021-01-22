@@ -95,7 +95,11 @@ const Write = ({
 
   return (
     <Container>
-      <WriteHeader handleSubmit={handleSubmit} handleSave={handleSave} />
+      <WriteHeader
+        handleSubmit={handleSubmit}
+        handleSave={handleSave}
+        findPost={findPost}
+      />
       <Title placeholder="제목" onChange={handleTitle} value={title} />
       <Editor
         previewStyle="vertical"

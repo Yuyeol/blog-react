@@ -49,7 +49,7 @@ const Publish = styled.button`
 `;
 const Exit = styled.span``;
 
-const WriteHeader = ({ history, handleSubmit, handleSave }) => {
+const WriteHeader = ({ history, handleSubmit, handleSave, findPost }) => {
   const handleExit = () => {
     history.goBack();
   };
@@ -61,12 +61,14 @@ const WriteHeader = ({ history, handleSubmit, handleSave }) => {
         </ExitLabel>
       </Exit>
       <SubmitBox>
-        <SaveLabel htmlFor="save" onClick={handleSave}>
-          임시저장
-        </SaveLabel>
+        {!findPost && (
+          <SaveLabel htmlFor="save" onClick={handleSave}>
+            임시저장
+          </SaveLabel>
+        )}
         <Save id="save" />
         <PublishLabel htmlFor="publish" onClick={handleSubmit}>
-          발행하기
+          {findPost ? "수정하기" : "발행하기"}
         </PublishLabel>
         <Publish id="publish" />
       </SubmitBox>

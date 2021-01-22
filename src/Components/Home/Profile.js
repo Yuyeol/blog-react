@@ -13,7 +13,7 @@ const PictureBox = styled.div`
   padding: 10px;
 `;
 const Picture = styled.img`
-  width: 190px;
+  width: 100%;
 `;
 const Info = styled.div`
   padding: 0 10px;

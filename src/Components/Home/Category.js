@@ -1,4 +1,5 @@
 import { useContextState } from "context";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import Profile from "./Profile";
 import WriteBtn from "./WriteBtn";
@@ -28,15 +29,18 @@ const Title = styled.div`
   padding-bottom: 10px;
   border-bottom: 1.5px solid #9a161f;
 `;
-const Item = styled.div``;
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-  const { posts } = useContextState();
+const Item = styled.div`
+  cursor: pointer;
+`;
+const SavedLink = styled(Link)``;
+
+const Category = ({ match: { path } }) => {
+  const { posts, saved } = useContextState();
   return (
     <Container>
       <Profile />
       <Write>
-        {posts.length > 0 && (
+        {posts.length > 0 && !path === "/saved" && (
           <WriteBox>
             <WriteBtn />
           </WriteBox>
@@ -44,8 +48,12 @@ export default () => {
       </Write>
       <List>
         <Title>카테고리</Title>
-        <Item>전체보기 (0)</Item>
+        <Item>전체보기 ({posts.length})</Item>
+        <SavedLink to="/saved">
+          <Item>임시 저장함 ({saved.length})</Item>
+        </SavedLink>
       </List>
     </Container>
   );
 };
+export default withRouter(Category);

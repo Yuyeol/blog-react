@@ -18,26 +18,26 @@ export const initialState = {
     // },
   ],
   saved: [
-    {
-      id: uuid(),
-      title: "1st",
-      contents: "contents",
-      date: moment().format("lll"),
-    },
-    {
-      id: uuid(),
-      title: "1st",
-      contents: "contents",
-      like: 0,
-      comments: 0,
-      date: moment().format("lll"),
-    },
-    {
-      id: uuid(),
-      title: "1st",
-      contents: "contents",
-      date: moment().format("lll"),
-    },
+    // {
+    //   id: uuid(),
+    //   title: "1st",
+    //   contents: "contents",
+    //   date: moment().format("lll"),
+    // },
+    // {
+    //   id: uuid(),
+    //   title: "1st",
+    //   contents: "contents",
+    //   like: 0,
+    //   comments: 0,
+    //   date: moment().format("lll"),
+    // },
+    // {
+    //   id: uuid(),
+    //   title: "1st",
+    //   contents: "contents",
+    //   date: moment().format("lll"),
+    // },
   ],
 };
 

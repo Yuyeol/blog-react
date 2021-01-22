@@ -8,7 +8,7 @@ import Comment from "./Comment";
 import PostMore from "./PostMore";
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 20px 30px;
   border: 2px solid ${PINK};
   width: 100%;
   margin-bottom: 10px;

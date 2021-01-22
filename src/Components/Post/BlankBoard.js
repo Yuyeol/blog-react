@@ -1,5 +1,9 @@
 import WriteBtn from "Components/Home/WriteBtn";
+import { useContextState } from "context";
+import { AiFillFolderOpen } from "react-icons/ai";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { PINK, RED } from "styles";
 
 const Container = styled.div`
   width: 100%;
@@ -12,6 +16,10 @@ const Container = styled.div`
 `;
 const TextBox = styled.div`
   text-align: center;
+  svg {
+    font-size: 200px;
+    color: ${PINK};
+  }
 `;
 const BigText = styled.div`
   font-size: 32px;
@@ -27,18 +35,35 @@ const WriteBox = styled.div`
   font-size: 28px;
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => (
-  <Container>
-    <TextBox>
-      <BigText>아직 작성된 글이 없습니다.</BigText>
-      <Text>
-        문득 스치는 생각이나 기분, 일기 등 다양한 이야기로
-        <br /> 나만의 공간을 채워보세요!
-      </Text>
-    </TextBox>
-    <WriteBox>
-      <WriteBtn />
-    </WriteBox>
-  </Container>
-);
+const BlankBoard = ({ match: { path } }) => {
+  return (
+    <Container>
+      <TextBox>
+        <AiFillFolderOpen />
+        <BigText>
+          {path === "/"
+            ? "아직 작성된 글이 없습니다."
+            : "아직 저장된 글이 없습니다."}
+        </BigText>
+        {path === "/" ? (
+          <Text>
+            문득 스치는 생각이나 기분, 일기 등 다양한 이야기로
+            <br /> 나만의 공간을 채워보세요!
+          </Text>
+        ) : (
+          <Text>
+            작성중인 글을 임시저장하는 기능을
+            <br /> 필요에 따라 활용해 보세요!
+          </Text>
+        )}
+      </TextBox>
+      {path === "/" && (
+        <WriteBox>
+          <WriteBtn />
+        </WriteBox>
+      )}
+    </Container>
+  );
+};
+
+export default withRouter(BlankBoard);

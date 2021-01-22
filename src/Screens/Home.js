@@ -4,10 +4,11 @@ import { useContextState } from "context";
 import Category from "Components/Home/Category";
 import Post from "Components/Post/Post";
 import BlankBoard from "Components/Post/BlankBoard";
+import MenuHeader from "Components/Header/MenuHeader";
 
 const Container = styled.div`
   margin: 0px 140px;
-  padding: 85px 10px 0 10px;
+  padding: 0px 10px;
   background-color: white;
   display: flex;
   position: relative;
@@ -23,15 +24,18 @@ const PostBox = styled.div`
 export default () => {
   const { posts } = useContextState();
   return (
-    <Container>
-      <Category />
-      <PostBox>
-        {posts.length === 0 ? (
-          <BlankBoard />
-        ) : (
-          posts.map((p) => <Post key={p.id} post={p} />)
-        )}
-      </PostBox>
-    </Container>
+    <>
+      <MenuHeader />
+      <Container>
+        <Category />
+        <PostBox>
+          {posts.length === 0 ? (
+            <BlankBoard />
+          ) : (
+            posts.map((p) => <Post key={p.id} post={p} />)
+          )}
+        </PostBox>
+      </Container>
+    </>
   );
 };
