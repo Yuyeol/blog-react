@@ -20,7 +20,7 @@ const MenuBox = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  &:hover {
+  & div:hover {
     color: ${BLACK};
     transition: color 0.5s ease;
   }

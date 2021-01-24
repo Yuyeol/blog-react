@@ -6,6 +6,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import Comment from "./Comment";
 import PostMore from "./PostMore";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -41,11 +42,27 @@ const MoreBox = styled.div`
   font-size: 24px;
   color: grey;
   cursor: pointer;
+  svg {
+    &:hover {
+      color: black;
+      transition: background-color 0.2s ease-in-out;
+    }
+  }
+`;
+const TitleBox = styled.div`
+  margin: 15px 0;
+  font-size: 24px;
+  display: flex;
+`;
+const Category = styled.div`
+  color: grey;
+`;
+const Bar = styled.div`
+  color: lightgrey;
+  margin: 0 7px;
 `;
 const Title = styled.div`
   font-weight: 600;
-  font-size: 30px;
-  margin: 15px 0;
 `;
 const Contents = styled.div`
   & img {
@@ -69,8 +86,7 @@ const Dot = styled.div`
   padding: 0 8px;
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default ({ post, saved }) => {
+const Post = ({ post, saved }) => {
   const [moreOpen, setMoreOpen] = useState(false);
   const more = useRef(null);
   const toggleMore = () => {
@@ -114,10 +130,26 @@ export default ({ post, saved }) => {
           )}
         </MoreBox>
       </PostHead>
-      <Title>
-        {post && post.title}
-        {saved && saved.title}
-      </Title>
+      <TitleBox>
+        {post && post.category && (
+          <>
+            <Link to={`/post/${post.category}`}>
+              <Category>{post.category}</Category>
+            </Link>
+            <Bar>I</Bar>
+          </>
+        )}
+        {saved && saved.category && (
+          <>
+            <Category>{saved.category}</Category>
+            <Bar>I</Bar>
+          </>
+        )}
+        <Title>
+          {post && post.title}
+          {saved && saved.title}
+        </Title>
+      </TitleBox>
       <Contents>
         {post && HTMLReactParser(post.contents)}
         {saved && HTMLReactParser(saved.contents)}
@@ -143,3 +175,5 @@ export default ({ post, saved }) => {
     </Container>
   );
 };
+
+export default Post;

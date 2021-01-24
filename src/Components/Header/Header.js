@@ -4,7 +4,7 @@ import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { PROFILE, LOGO } from "styles";
+import { PROFILE, LOGO, BLACK } from "styles";
 import HeaderMore from "./HeaderMore";
 
 const Container = styled.div`
@@ -46,7 +46,7 @@ const MoreBox = styled.div`
   display: flex;
   align-items: center;
   &:hover {
-    color: black;
+    color: ${BLACK};
     transition: background-color 0.2s ease-in-out;
   }
   cursor: pointer;

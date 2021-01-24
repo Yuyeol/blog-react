@@ -1,9 +1,9 @@
 import WriteBtn from "Components/Home/WriteBtn";
-import { useContextState } from "context";
 import { AiFillFolderOpen } from "react-icons/ai";
+import { BsFileRichtext } from "react-icons/bs";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { PINK, RED } from "styles";
+import { PINK } from "styles";
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +39,7 @@ const BlankBoard = ({ match: { path } }) => {
   return (
     <Container>
       <TextBox>
-        <AiFillFolderOpen />
+        {path === "/" ? <BsFileRichtext /> : <AiFillFolderOpen />}
         <BigText>
           {path === "/"
             ? "아직 작성된 글이 없습니다."

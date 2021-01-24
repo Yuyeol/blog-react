@@ -1,10 +1,10 @@
 import styled from "styled-components";
-// import BlankBoard from "Components/Home/BlankBoard";
 import { useContextState } from "context";
 import Category from "Components/Home/Category";
 import Post from "Components/Post/Post";
 import BlankBoard from "Components/Post/BlankBoard";
-import MenuHeader from "Components/Header/MenuHeader";
+import MenuHeader from "Components/Home/MenuHeader";
+import TopList from "Components/Home/TopList";
 
 const Container = styled.div`
   margin: 0px 140px;
@@ -20,22 +20,35 @@ const PostBox = styled.div`
   height: 100%;
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+const Home = ({
+  match: {
+    url,
+    params: { id },
+  },
+}) => {
   const { posts } = useContextState();
+  const filterPosts = posts.filter((p) => id === p.category);
+
   return (
     <>
       <MenuHeader />
       <Container>
         <Category />
         <PostBox>
-          {posts.length === 0 ? (
-            <BlankBoard />
-          ) : (
-            posts.map((p) => <Post key={p.id} post={p} />)
-          )}
+          <TopList />
+          {
+            posts.length === 0 ? (
+              <BlankBoard />
+            ) : url === "/" ? (
+              posts.map((p) => <Post key={p.id} post={p} />)
+            ) : url.includes("post") ? (
+              filterPosts.map((p) => <Post key={p.id} post={p} />)
+            ) : null
+            // 나중에 notfound 디자인해서 넣을거임 지금은 귀찮아서....
+          }
         </PostBox>
       </Container>
     </>
   );
 };
+export default Home;

@@ -2,23 +2,52 @@ import styled from "styled-components";
 import "codemirror/lib/codemirror.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useContextDispatch, useContextState } from "context";
-import WriteHeader from "Components/Header/WriteHeader";
 import { CREATE, COMPLETE, SAVE, UPDATE } from "reducer";
+import { BLACK } from "styles";
+import { AiFillCaretDown } from "react-icons/ai";
+import WriteHeader from "Components/Write/WriteHeader";
+import SelectCategories from "Components/Write/SelectCategories";
 
 const Container = styled.div`
   padding: 100px;
   z-index: -1;
   background-color: white;
 `;
+const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Categories = styled.div`
+  font-size: 24px;
+  font-weight: 600;
+  padding-bottom: 2px;
+  color: grey;
+  &:hover {
+    color: ${BLACK};
+    transition: color 0.5s ease;
+  }
+  svg {
+    padding-top: 6px;
+  }
+`;
 const Title = styled.input`
   font-size: 24px;
   font-weight: 600;
   border: none;
   margin: 15px 0;
+  flex: 1;
+  &:focus {
+    outline: none;
+  }
 `;
-
+const Bar = styled.div`
+  font-size: 28px;
+  color: lightgrey;
+  padding-bottom: 2px;
+  margin: 0 7px;
+`;
 const Write = ({
   match: {
     params: { id },
@@ -41,6 +70,8 @@ const Write = ({
     findPost ? findPost.contents : findSaved ? findSaved.contents : ""
   );
 
+  const [category, setCategory] = useState("");
+
   // 발행하기 버튼
   const handleSubmit = () => {
     if (findPost) {
@@ -53,17 +84,22 @@ const Write = ({
           contents,
           like: findPost.like,
           comments: findPost.comments,
+          category,
         },
       });
     } else {
-      // Create Post
+      // Publish Saved
       if (findSaved) {
-        console.log("dsafwef");
-        dispatch({ type: COMPLETE, payload: { id, title, contents } });
+        console.log(category);
+        dispatch({
+          type: COMPLETE,
+          payload: { id, title, contents, category },
+        });
+        // Publish Post
       } else {
         dispatch({
           type: CREATE,
-          payload: { title, contents },
+          payload: { title, contents, category },
         });
       }
     }
@@ -74,24 +110,45 @@ const Write = ({
     if (findSaved) {
       dispatch({
         type: SAVE,
-        payload: { title, contents, id },
+        payload: { title, contents, id, category },
       });
+      // Update SAVE
     } else {
       dispatch({
         type: SAVE,
-        payload: { title, contents },
+        payload: { title, contents, category },
       });
     }
   };
 
-  const handleTitle = (e) => {
-    const title = e.target.value;
-    setTitle(title);
+  // 입력시 스테이트에 저장
+  const handleTitle = ({ target: { value } }) => {
+    setTitle(value);
   };
   const handleContents = () => {
     const contents = editorRef.current.getInstance().getHtml();
     setContents(contents);
   };
+  const handleCategory = ({ target: { innerText } }) => {
+    setCategory(innerText);
+  };
+
+  // 카테고리 셀렉트박스 토글
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const categories = useRef(null);
+  const toggleCategories = () => {
+    setCategoryOpen(!categoryOpen);
+  };
+  const handleClickOutside = ({ target }) => {
+    if (categories.current && !categories.current.contains(target))
+      setCategoryOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Container>
@@ -100,7 +157,15 @@ const Write = ({
         handleSave={handleSave}
         findPost={findPost}
       />
-      <Title placeholder="제목" onChange={handleTitle} value={title} />
+      <TitleBox>
+        <Categories onClick={toggleCategories} ref={categories}>
+          {category ? category : "카테고리"}
+          <AiFillCaretDown />
+        </Categories>
+        {categoryOpen && <SelectCategories handleCategory={handleCategory} />}
+        <Bar>I</Bar>
+        <Title placeholder="제목" onChange={handleTitle} value={title} />
+      </TitleBox>
       <Editor
         previewStyle="vertical"
         height="70vh"

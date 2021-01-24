@@ -8,22 +8,25 @@ export const DELETE = "delete";
 export const COMPLETE = "complete";
 
 export const initialState = {
+  categories: ["Sample 1", "Sample 2", "Sample 3"],
   posts: [
-    // {
-    //   id: 1,
-    //   title: "1st",
-    //   contents: "contents",
-    //   like: 0,
-    //   comments: 0,
-    // },
+    {
+      id: 1,
+      title: "첫번째",
+      contents: "contents",
+      like: 0,
+      comments: 0,
+      category: "카테고리",
+    },
   ],
   saved: [
-    // {
-    //   id: uuid(),
-    //   title: "1st",
-    //   contents: "contents",
-    //   date: moment().format("lll"),
-    // },
+    {
+      id: uuid(),
+      title: "첫번째",
+      contents: "contents",
+      date: moment().format("lll"),
+      category: "",
+    },
     // {
     //   id: uuid(),
     //   title: "1st",
@@ -55,6 +58,7 @@ const reducer = (state, action) => {
             date: moment().format("lll"),
             like: 0,
             comments: 0,
+            category: action.payload.category,
           },
         ],
       };
@@ -69,6 +73,7 @@ const reducer = (state, action) => {
             title: action.payload.title,
             contents: action.payload.contents,
             date: moment().format("lll"),
+            category: action.payload.category,
           },
         ],
       };
@@ -85,6 +90,7 @@ const reducer = (state, action) => {
             ...updated,
             title: action.payload.title,
             contents: action.payload.contents,
+            category: action.payload.category,
           },
         ],
       };
@@ -107,6 +113,7 @@ const reducer = (state, action) => {
             date: moment().format("lll"),
             like: 0,
             comments: 0,
+            category: action.payload.category,
           },
         ],
       };

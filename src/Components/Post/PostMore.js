@@ -17,6 +17,10 @@ const MoreList = styled.div`
 `;
 const MoreItem = styled.div`
   font-size: 20px;
+  &:hover {
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+  }
 `;
 const MoreLink = styled(Link)`
   display: block;
