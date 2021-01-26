@@ -70,7 +70,9 @@ const Write = ({
     findPost ? findPost.contents : findSaved ? findSaved.contents : ""
   );
 
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(
+    findPost ? findPost.category : findSaved ? findSaved.category : ""
+  );
 
   // 발행하기 버튼
   const handleSubmit = () => {
@@ -90,7 +92,6 @@ const Write = ({
     } else {
       // Publish Saved
       if (findSaved) {
-        console.log(category);
         dispatch({
           type: COMPLETE,
           payload: { id, title, contents, category },

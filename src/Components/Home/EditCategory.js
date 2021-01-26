@@ -2,7 +2,7 @@ import { useContextDispatch, useContextState } from "context";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { PINK } from "styles";
-import { CATEGORY_C } from "reducer";
+import { CATEGORY_C, CATEGORY_D, CATEGORY_U } from "reducer";
 
 const Container = styled.div`
   background-color: white;
@@ -45,12 +45,20 @@ const Container = styled.div`
     padding: 5px;
     .categories {
       .item-row {
-        font-size: 18px;
         padding-bottom: 5px;
         margin-bottom: 5px;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid ${PINK};
+        .item {
+          font-size: 17px;
+          flex: 1;
+          width: 100%;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
         .edit-block {
           display: flex;
           align-items: center;
@@ -74,7 +82,7 @@ const EditCategory = () => {
   const { categories } = useContextState();
   const dispatch = useContextDispatch();
   const [input, setInput] = useState("");
-  const handleInput = ({ target: { value } }) => {
+  const handleAddInput = ({ target: { value } }) => {
     setInput(value);
   };
   const handleSubmit = () => {
@@ -84,14 +92,26 @@ const EditCategory = () => {
     });
     setInput("");
   };
-  const handleEdit = (e) => {
-    console.log(e);
+  const [editInput, setEditInput] = useState("");
+  const handleEditInput = ({ target: { value } }) => {
+    setEditInput(value);
   };
-  const handleDelete = () => {};
+  const handleEdit = (e) => {
+    const category = e.target.parentNode.parentNode.firstChild.placeholder;
+    dispatch({ type: CATEGORY_U, payload: { editInput, category } });
+  };
+  const handleDelete = (e) => {
+    const category = e.target.parentNode.parentNode.firstChild.placeholder;
+    console.log(category);
+    dispatch({
+      type: CATEGORY_D,
+      payload: category,
+    });
+  };
   return (
     <Container>
       <form>
-        <input placeholder="카테고리" value={input} onChange={handleInput} />
+        <input placeholder="카테고리" value={input} onChange={handleAddInput} />
         <div className="submit" onClick={handleSubmit}>
           추가
         </div>
@@ -101,7 +121,12 @@ const EditCategory = () => {
           {categories.map((category, index) => (
             <div key={index}>
               <div className="item-row">
-                <div className="item">{category}</div>
+                {/* <div className="item">{category.item}</div> */}
+                <input
+                  className="item"
+                  placeholder={category.item}
+                  onChange={handleEditInput}
+                />
                 <div className="edit-block">
                   <div className="edit" onClick={handleEdit}>
                     수정

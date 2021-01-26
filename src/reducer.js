@@ -6,18 +6,24 @@ export const SAVE = "save";
 export const UPDATE = "update";
 export const DELETE = "delete";
 export const COMPLETE = "complete";
-export const CATEGORY_C = "category_c";
+export const CATEGORY_C = "category_create";
+export const CATEGORY_U = "category_update";
+export const CATEGORY_D = "category_delete";
 
 export const initialState = {
-  categories: ["Sample 1", "Sample 2", "Sample 3"],
+  categories: [
+    { id: uuid(), item: "Sample 1" },
+    { id: uuid(), item: "Sample 2" },
+    { id: uuid(), item: "Sample 3" },
+  ],
   posts: [
     {
-      id: 1,
+      id: uuid(),
       title: "첫번째",
       contents: "contents",
       like: 0,
       comments: 0,
-      category: "카테고리",
+      category: "Sample 1",
     },
   ],
   saved: [
@@ -80,16 +86,18 @@ const reducer = (state, action) => {
         ],
       };
     case UPDATE:
-      const notUpdated = state.posts.filter(
+      const notUpdatedP = state.posts.filter(
         (post) => post.id !== action.payload.id
       );
-      const updated = state.posts.find((post) => post.id === action.payload.id);
+      const updatedP = state.posts.find(
+        (post) => post.id === action.payload.id
+      );
       return {
         ...state,
         posts: [
-          ...notUpdated,
+          ...notUpdatedP,
           {
-            ...updated,
+            ...updatedP,
             title: action.payload.title,
             contents: action.payload.contents,
             category: action.payload.category,
@@ -124,7 +132,39 @@ const reducer = (state, action) => {
     case CATEGORY_C:
       return {
         ...state,
-        categories: [...state.categories, action.payload],
+        categories: [
+          ...state.categories,
+          {
+            id: uuid(),
+            item: action.payload,
+          },
+        ],
+      };
+    case CATEGORY_U:
+      const notUpdatedC = state.categories.filter(
+        (c) => c.item !== action.payload.category
+      );
+      const updatedC = state.categories.find(
+        (c) => c.item === action.payload.category
+      );
+      // console.log(notUpdatedC, "  ", updatedC);
+      console.log(action.payload.category);
+
+      return {
+        ...state,
+        categories: [
+          ...notUpdatedC,
+          {
+            updatedC,
+            id: uuid(),
+            item: action.payload.editInput,
+          },
+        ],
+      };
+    case CATEGORY_D:
+      return {
+        ...state,
+        categories: state.categories.filter((c) => c.item !== action.payload),
       };
     default:
       return;

@@ -126,7 +126,10 @@ const Post = ({ post, saved }) => {
           <BsThreeDots />
           {/* 수정, 삭제하는곳 */}
           {moreOpen && (
-            <PostMore id={(post && post.id) || (saved && saved.id)} />
+            <PostMore
+              id={(post && post.id) || (saved && saved.id)}
+              category={post.category}
+            />
           )}
         </MoreBox>
       </PostHead>

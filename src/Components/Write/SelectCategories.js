@@ -29,9 +29,9 @@ const SelectCategories = ({ handleCategory }) => {
       {categories.length === 0 ? (
         <div>생성된 카테고리가 없습니다.</div>
       ) : (
-        categories.map((category) => (
-          <CategoriesItem key={category} onClick={handleCategory}>
-            {category}
+        categories.map((category, index) => (
+          <CategoriesItem key={index} onClick={handleCategory}>
+            {category.item}
           </CategoriesItem>
         ))
       )}

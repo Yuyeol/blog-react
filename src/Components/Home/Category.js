@@ -70,9 +70,7 @@ const Category = ({
     params: { id },
   },
 }) => {
-  const { categories, posts, saved } = useContextState();
-  const filterPosts = posts.filter((p) => id === p.category);
-
+  const { categories, posts } = useContextState();
   // 에디트 모달
   const [editOpen, setEditOpen] = useState(true);
   const edit = useRef(null);
@@ -119,21 +117,21 @@ const Category = ({
         )}
         <ListLink to="/" selected={url === "/"}>
           <RiFoldersLine />
-          전체보기 ({posts.length})
+          전체보기
         </ListLink>
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <ListLink
-            to={`/post/${category}`}
-            key={index}
-            selected={url === `/post/${category}`}
+            to={`/post/${category.item}`}
+            key={category.id}
+            selected={url === `/post/${category.item}`}
           >
             <RiFolderLine />
-            {category} ({filterPosts.length})
+            {category.item}
           </ListLink>
         ))}
         <ListLink to="/saved" selected={url === "/saved"}>
           <RiFolderWarningLine />
-          임시 저장함 ({saved.length})
+          임시 저장함
         </ListLink>
       </List>
     </Container>

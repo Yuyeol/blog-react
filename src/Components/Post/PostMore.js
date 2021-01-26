@@ -30,12 +30,12 @@ const MoreLink = styled(Link)`
   }
 `;
 
-const PostMore = ({ id }) => {
+const PostMore = ({ id, category }) => {
   const dispatch = useContextDispatch();
   const handleDelete = () => {
     dispatch({
       type: DELETE,
-      payload: { id },
+      payload: { id, category },
     });
   };
   return (
