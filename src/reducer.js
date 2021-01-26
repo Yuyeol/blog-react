@@ -6,6 +6,7 @@ export const SAVE = "save";
 export const UPDATE = "update";
 export const DELETE = "delete";
 export const COMPLETE = "complete";
+export const CATEGORY_C = "category_c";
 
 export const initialState = {
   categories: ["Sample 1", "Sample 2", "Sample 3"],
@@ -46,6 +47,7 @@ export const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // 포스트 CRUD
     case CREATE:
       return {
         ...state,
@@ -116,6 +118,13 @@ const reducer = (state, action) => {
             category: action.payload.category,
           },
         ],
+      };
+
+    // 카테고리 CRUD
+    case CATEGORY_C:
+      return {
+        ...state,
+        categories: [...state.categories, action.payload],
       };
     default:
       return;

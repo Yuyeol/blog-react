@@ -56,7 +56,7 @@ const MenuHeader = () => {
         <MenuColumn>전체메뉴</MenuColumn>
         <MenuColumn>
           <MenuLink to="/saved">
-            <span>임시저장함({saved.length})</span>
+            <span>임시저장함 ({saved.length})</span>
           </MenuLink>
           <span>I</span>
           <MenuLink to="/settings">

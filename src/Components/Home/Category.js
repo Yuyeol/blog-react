@@ -1,4 +1,6 @@
+import EditCategory from "Components/Home/EditCategory";
 import { useContextState } from "context";
+import { useEffect, useRef, useState } from "react";
 import {
   RiFolderLine,
   RiFoldersLine,
@@ -6,6 +8,7 @@ import {
 } from "react-icons/ri";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { BLACK, PINK } from "styles";
 import Profile from "./Profile";
 import WriteBtn from "./WriteBtn";
 
@@ -31,11 +34,26 @@ const List = styled.div`
   }
 `;
 const Title = styled.div`
+  display: flex;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1.5px solid #9a161f;
+  div {
+    display: flex;
+    align-items: center;
+  }
+  div:last-child {
+    margin-left: 5px;
+    font-size: 14px;
+    background: linear-gradient(to top, #e2dedb, ${PINK});
+    color: ${BLACK};
+    border-radius: 7px;
+    padding: 0 5px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
 `;
 const ListLink = styled(Link)`
   display: block;
@@ -55,6 +73,28 @@ const Category = ({
   const { categories, posts, saved } = useContextState();
   const filterPosts = posts.filter((p) => id === p.category);
 
+  // 에디트 모달
+  const [editOpen, setEditOpen] = useState(true);
+  const edit = useRef(null);
+  const modal = useRef(null);
+  const toggleEdit = () => {
+    setEditOpen(!editOpen);
+  };
+  const handleClickOutside = ({ target }) => {
+    if (
+      modal.current &&
+      !modal.current.contains(target) &&
+      edit.current &&
+      !edit.current.contains(target)
+    )
+      setEditOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <Container>
       <Profile />
@@ -66,19 +106,29 @@ const Category = ({
         )}
       </Write>
       <List>
-        <Title>카테고리</Title>
+        <Title>
+          <div>카테고리</div>
+          <div onClick={toggleEdit} ref={edit}>
+            수정
+          </div>
+        </Title>
+        {editOpen && (
+          <div ref={modal}>
+            <EditCategory />
+          </div>
+        )}
         <ListLink to="/" selected={url === "/"}>
           <RiFoldersLine />
           전체보기 ({posts.length})
         </ListLink>
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <ListLink
             to={`/post/${category}`}
-            key={category}
+            key={index}
             selected={url === `/post/${category}`}
           >
             <RiFolderLine />
-            {category}({filterPosts.length})
+            {category} ({filterPosts.length})
           </ListLink>
         ))}
         <ListLink to="/saved" selected={url === "/saved"}>

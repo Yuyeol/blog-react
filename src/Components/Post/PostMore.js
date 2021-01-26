@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DELETE } from "reducer";
 import styled from "styled-components";
+import { BLACK } from "styles";
 
 const MoreList = styled.div`
   display: block;
@@ -18,8 +19,8 @@ const MoreList = styled.div`
 const MoreItem = styled.div`
   font-size: 20px;
   &:hover {
-    color: black;
-    transition: background-color 0.2s ease-in-out;
+    color: ${BLACK};
+    transition: color 0.2s ease-in-out;
   }
 `;
 const MoreLink = styled(Link)`

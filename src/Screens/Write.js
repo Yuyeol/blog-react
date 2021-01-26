@@ -133,7 +133,7 @@ const Write = ({
     setCategory(innerText);
   };
 
-  // 카테고리 셀렉트박스 토글
+  // 카테고리 셀렉트박스 모달
   const [categoryOpen, setCategoryOpen] = useState(false);
   const categories = useRef(null);
   const toggleCategories = () => {
