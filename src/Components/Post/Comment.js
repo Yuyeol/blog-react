@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { PINK, PROFILE } from "styles";
+import { PINK } from "styles";
+import profileImg from "Assets/profile.jpg";
 
 const CommentBox = styled.div`
   border: 2px solid ${PINK};
@@ -13,11 +14,11 @@ const Nick = styled.div`
   align-items: center;
   font-size: 20px;
   border-bottom: 1px solid ${PINK};
-`;
-const NickImg = styled.img`
-  width: 20px;
-  border-radius: 10px;
-  margin-right: 5px;
+  .nick-img {
+    width: 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+  }
 `;
 const CommentForm = styled.form``;
 const CommentInput = styled.textarea`
@@ -52,7 +53,7 @@ const Comment = () => {
   return (
     <CommentBox>
       <Nick>
-        <NickImg src={PROFILE} />
+        <img className="nick-img" src={profileImg} alt="PROFILE" />
         URE
       </Nick>
       <CommentForm>

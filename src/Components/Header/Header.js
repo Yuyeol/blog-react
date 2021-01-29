@@ -4,8 +4,10 @@ import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { PROFILE, LOGO, BLACK } from "styles";
+import { BLACK } from "styles";
 import HeaderMore from "./HeaderMore";
+import profileImg from "Assets/profile.jpg";
+import logoImg from "Assets/logo.png";
 
 const Container = styled.div`
   position: fixed;
@@ -22,24 +24,18 @@ const Container = styled.div`
 const Column = styled.div`
   display: flex;
   align-items: center;
-`;
-const Home = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  margin-right: 15px;
+  .home {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
 `;
 const ID = styled.div`
   font-size: 30px;
 `;
 const Search = styled.div`
   font-size: 30px;
-`;
-const User = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 0 20px;
 `;
 const MoreBox = styled.div`
   color: grey;
@@ -50,6 +46,12 @@ const MoreBox = styled.div`
     transition: background-color 0.2s ease-in-out;
   }
   cursor: pointer;
+  .user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 20px;
+  }
 `;
 const HomeLink = styled(Link)``;
 
@@ -73,7 +75,7 @@ export default withRouter(({ location: { pathname } }) => {
     <Container active={pathname.substring(0, 6) !== "/write"}>
       <HomeLink to="/">
         <Column>
-          <Home src={LOGO} />
+          <img className="home" src={logoImg} alt="HOME" />
           <ID>URE's Blog</ID>
         </Column>
       </HomeLink>
@@ -82,7 +84,7 @@ export default withRouter(({ location: { pathname } }) => {
           <ImSearch />
         </Search>
         <MoreBox onClick={toggleMore} ref={more}>
-          <User src={PROFILE} />
+          <img className="user" src={profileImg} alt="Profile" />
           <AiFillCaretDown />
           {moreOpen && <HeaderMore />}
         </MoreBox>

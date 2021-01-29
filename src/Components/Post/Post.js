@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import HTMLReactParser from "html-react-parser";
-import { PINK, PROFILE } from "styles";
+import { PINK } from "styles";
 import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import Comment from "./Comment";
 import PostMore from "./PostMore";
 import { Link } from "react-router-dom";
+import { useContextState } from "context";
+import profileImg from "Assets/profile.jpg";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -26,10 +28,10 @@ const NickColumn = styled.div`
   display: flex;
   align-items: center;
   font-size: 24px;
-`;
-const NickImg = styled.img`
-  width: 32px;
-  border-radius: 15px;
+  .nick-img {
+    width: 32px;
+    border-radius: 15px;
+  }
 `;
 const Nick = styled.div`
   margin: 0 10px;
@@ -87,6 +89,13 @@ const Dot = styled.div`
 `;
 
 const Post = ({ post, saved }) => {
+  // 카테고리 스테이트와 포스트스테이트의 카테고리 값이 같은지 비교후 적용시킴
+  // : 카테고리 수정시 동기화가 안되기에 이렇게 설정함.
+  const { categories } = useContextState();
+  const category = categories.find((c) =>
+    post ? c.item === post.category : saved ? c.item === saved.category : null
+  );
+
   const [moreOpen, setMoreOpen] = useState(false);
   const more = useRef(null);
   const toggleMore = () => {
@@ -115,7 +124,7 @@ const Post = ({ post, saved }) => {
     <Container>
       <PostHead>
         <NickColumn>
-          <NickImg src={PROFILE} />
+          <img className="nick-img" src={profileImg} alt="PROFILE" />
           <Nick>URE</Nick>
           <Date>
             {post && post.date}
@@ -126,10 +135,7 @@ const Post = ({ post, saved }) => {
           <BsThreeDots />
           {/* 수정, 삭제하는곳 */}
           {moreOpen && (
-            <PostMore
-              id={(post && post.id) || (saved && saved.id)}
-              category={post.category}
-            />
+            <PostMore id={(post && post.id) || (saved && saved.id)} />
           )}
         </MoreBox>
       </PostHead>
@@ -137,15 +143,15 @@ const Post = ({ post, saved }) => {
         {post && post.category && (
           <>
             <Link to={`/post/${post.category}`}>
-              <Category>{post.category}</Category>
+              <Category>{category && category.item}</Category>
             </Link>
-            <Bar>I</Bar>
+            {category && <Bar>I</Bar>}
           </>
         )}
         {saved && saved.category && (
           <>
-            <Category>{saved.category}</Category>
-            <Bar>I</Bar>
+            <Category>{category && category.item}</Category>
+            {category && <Bar>I</Bar>}
           </>
         )}
         <Title>

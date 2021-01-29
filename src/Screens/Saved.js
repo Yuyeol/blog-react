@@ -1,11 +1,11 @@
 import MenuHeader from "Components/Home/MenuHeader";
-import Category from "Components/Home/Category";
 import BlankBoard from "Components/Post/BlankBoard";
 import Post from "Components/Post/Post";
 import { useContextState } from "context";
 import React from "react";
 import styled from "styled-components";
 import TopList from "Components/Home/TopList";
+import Category from "Components/Home/Category/Category";
 
 const Container = styled.div`
   margin: 0px 140px;

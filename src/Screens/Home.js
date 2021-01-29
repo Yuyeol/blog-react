@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useContextState } from "context";
-import Category from "Components/Home/Category";
 import Post from "Components/Post/Post";
 import BlankBoard from "Components/Post/BlankBoard";
 import MenuHeader from "Components/Home/MenuHeader";
 import TopList from "Components/Home/TopList";
+import Category from "Components/Home/Category/Category";
 
 const Container = styled.div`
   margin: 0px 140px;

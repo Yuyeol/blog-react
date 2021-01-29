@@ -1,7 +1,7 @@
 import { ImCog } from "react-icons/im";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { PROFILE } from "styles";
+import profileImg from "Assets/profile.jpg";
 
 const Profile = styled.div`
   border-bottom: 1.5px solid #f4efea;
@@ -11,9 +11,9 @@ const PictureBox = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px;
-`;
-const Picture = styled.img`
-  width: 100%;
+  .picture {
+    width: 100%;
+  }
 `;
 const Info = styled.div`
   padding: 0 10px;
@@ -41,7 +41,7 @@ const SLink = styled(Link)``;
 export default () => (
   <Profile>
     <PictureBox>
-      <Picture src={PROFILE} />
+      <img className="picture" src={profileImg} alt="PROFILE" />
     </PictureBox>
     <Info>
       <NicknameBox>

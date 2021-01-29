@@ -1,4 +1,3 @@
-import EditCategory from "Components/Home/EditCategory";
 import { useContextState } from "context";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -9,8 +8,9 @@ import {
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { BLACK, PINK } from "styles";
-import Profile from "./Profile";
-import WriteBtn from "./WriteBtn";
+import Profile from "../Profile";
+import WriteBtn from "../WriteBtn";
+import EditCategory from "./EditCategory";
 
 const Container = styled.div`
   width: 300px;
@@ -72,7 +72,7 @@ const Category = ({
 }) => {
   const { categories, posts } = useContextState();
   // 에디트 모달
-  const [editOpen, setEditOpen] = useState(true);
+  const [editOpen, setEditOpen] = useState(false);
   const edit = useRef(null);
   const modal = useRef(null);
   const toggleEdit = () => {

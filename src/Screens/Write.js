@@ -53,13 +53,24 @@ const Write = ({
     params: { id },
   },
 }) => {
-  const { posts, saved } = useContextState();
+  const { posts, saved, categories } = useContextState();
   const dispatch = useContextDispatch();
   const editorRef = useRef(null);
 
   // 수정하기에 해당되는 포스트 가져오기
   const findPost = posts.find((p) => p.id === id);
   const findSaved = saved.find((s) => s.id === id);
+  const findCategory = categories.find((c) =>
+    findPost
+      ? c.item === findPost.category
+      : findSaved
+      ? c.item === findSaved.category
+      : null
+  );
+  console.log(findCategory);
+  // const findSavedCategory = categories.find(
+  //   (c) => c.item === findSaved.category
+  // );
 
   //포스트 종류 구분하여 데이터 받아오기 : title
   const [title, setTitle] = useState(
@@ -136,12 +147,12 @@ const Write = ({
 
   // 카테고리 셀렉트박스 모달
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const categories = useRef(null);
+  const categoriesRef = useRef(null);
   const toggleCategories = () => {
     setCategoryOpen(!categoryOpen);
   };
   const handleClickOutside = ({ target }) => {
-    if (categories.current && !categories.current.contains(target))
+    if (categoriesRef.current && !categoriesRef.current.contains(target))
       setCategoryOpen(false);
   };
   useEffect(() => {
@@ -159,11 +170,12 @@ const Write = ({
         findPost={findPost}
       />
       <TitleBox>
-        <Categories onClick={toggleCategories} ref={categories}>
-          {category ? category : "카테고리"}
+        <Categories onClick={toggleCategories} ref={categoriesRef}>
+          {findCategory ? findCategory.item : "카테고리"}
           <AiFillCaretDown />
         </Categories>
         {categoryOpen && <SelectCategories handleCategory={handleCategory} />}
+
         <Bar>I</Bar>
         <Title placeholder="제목" onChange={handleTitle} value={title} />
       </TitleBox>

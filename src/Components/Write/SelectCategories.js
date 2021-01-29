@@ -24,6 +24,7 @@ const CategoriesItem = styled.div`
 
 const SelectCategories = ({ handleCategory }) => {
   const { categories } = useContextState();
+
   return (
     <Container>
       {categories.length === 0 ? (

@@ -32,7 +32,7 @@ export const initialState = {
       title: "첫번째",
       contents: "contents",
       date: moment().format("lll"),
-      category: "",
+      category: "Sample 1",
     },
     // {
     //   id: uuid(),
@@ -137,27 +137,6 @@ const reducer = (state, action) => {
           {
             id: uuid(),
             item: action.payload,
-          },
-        ],
-      };
-    case CATEGORY_U:
-      const notUpdatedC = state.categories.filter(
-        (c) => c.item !== action.payload.category
-      );
-      const updatedC = state.categories.find(
-        (c) => c.item === action.payload.category
-      );
-      // console.log(notUpdatedC, "  ", updatedC);
-      console.log(action.payload.category);
-
-      return {
-        ...state,
-        categories: [
-          ...notUpdatedC,
-          {
-            updatedC,
-            id: uuid(),
-            item: action.payload.editInput,
           },
         ],
       };
