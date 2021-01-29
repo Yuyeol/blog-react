@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import HTMLReactParser from "html-react-parser";
-import { PINK } from "styles";
+import { BLACK, PINK } from "styles";
 import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
@@ -46,7 +46,7 @@ const MoreBox = styled.div`
   cursor: pointer;
   svg {
     &:hover {
-      color: black;
+      color: ${BLACK};
       transition: background-color 0.2s ease-in-out;
     }
   }

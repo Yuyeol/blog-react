@@ -2,6 +2,7 @@ import { ImCog } from "react-icons/im";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import profileImg from "Assets/profile.jpg";
+import { BLACK } from "styles";
 
 const Profile = styled.div`
   border-bottom: 1.5px solid #f4efea;
@@ -30,6 +31,12 @@ const EditProfile = styled.div`
   color: grey;
   display: flex;
   padding-top: 4px;
+  svg {
+    &:hover {
+      color: ${BLACK};
+      transition: background-color 0.2s ease-in-out;
+    }
+  }
 `;
 const Intro = styled.div`
   line-height: 1.5;
