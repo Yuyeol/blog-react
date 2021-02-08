@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
-import { ImSearch } from "react-icons/im";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { BLACK } from "styles";
 import HeaderMore from "./HeaderMore";
-import profileImg from "Assets/profile.jpg";
 import logoImg from "Assets/logo.png";
+import { useContextState } from "context";
 
 const Container = styled.div`
   position: fixed;
@@ -34,9 +33,6 @@ const Column = styled.div`
 const ID = styled.div`
   font-size: 30px;
 `;
-const Search = styled.div`
-  font-size: 30px;
-`;
 const MoreBox = styled.div`
   color: grey;
   display: flex;
@@ -55,8 +51,8 @@ const MoreBox = styled.div`
 `;
 const HomeLink = styled(Link)``;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default withRouter(({ location: { pathname } }) => {
+const Header = ({ location: { pathname } }) => {
+  const { profile } = useContextState();
   const [moreOpen, setMoreOpen] = useState(false);
   const more = useRef(null);
   const toggleMore = () => {
@@ -76,19 +72,18 @@ export default withRouter(({ location: { pathname } }) => {
       <HomeLink to="/">
         <Column>
           <img className="home" src={logoImg} alt="HOME" />
-          <ID>URE's Blog</ID>
+          <ID>{profile.blogName}</ID>
         </Column>
       </HomeLink>
       <Column>
-        <Search>
-          <ImSearch />
-        </Search>
         <MoreBox onClick={toggleMore} ref={more}>
-          <img className="user" src={profileImg} alt="Profile" />
+          <img className="user" src={profile.profileImg} alt="Profile" />
           <AiFillCaretDown />
           {moreOpen && <HeaderMore />}
         </MoreBox>
       </Column>
     </Container>
   );
-});
+};
+
+export default withRouter(Header);

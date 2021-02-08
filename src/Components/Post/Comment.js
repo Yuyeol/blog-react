@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PINK } from "styles";
-import profileImg from "Assets/profile.jpg";
+import { useContextState } from "context";
 
 const CommentBox = styled.div`
   border: 2px solid ${PINK};
@@ -50,11 +50,12 @@ const Submit = styled.input`
 `;
 
 const Comment = () => {
+  const { profile } = useContextState();
   return (
     <CommentBox>
       <Nick>
-        <img className="nick-img" src={profileImg} alt="PROFILE" />
-        URE
+        <img className="nick-img" src={profile.profileImg} alt="PROFILE" />
+        {profile.nickName}
       </Nick>
       <CommentForm>
         <CommentInput placeholder="댓글을 입력해보세요!" />

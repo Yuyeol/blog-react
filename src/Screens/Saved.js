@@ -8,11 +8,17 @@ import TopList from "Components/Home/TopList";
 import Category from "Components/Home/Category/Category";
 
 const Container = styled.div`
-  margin: 0px 140px;
-  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Main = styled.div`
+  padding: 0 15px;
   background-color: white;
   display: flex;
   position: relative;
+  width: 1000px;
   background-color: white;
 `;
 const PostBox = styled.div`
@@ -23,9 +29,9 @@ const PostBox = styled.div`
 const Saved = () => {
   const { saved } = useContextState();
   return (
-    <>
+    <Container>
       <MenuHeader />
-      <Container>
+      <Main>
         <Category />
         <PostBox>
           <TopList />
@@ -35,8 +41,8 @@ const Saved = () => {
             saved.map((s) => <Post key={s.id} saved={s} />)
           )}
         </PostBox>
-      </Container>
-    </>
+      </Main>
+    </Container>
   );
 };
 

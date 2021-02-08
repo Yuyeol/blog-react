@@ -8,7 +8,6 @@ import Comment from "./Comment";
 import PostMore from "./PostMore";
 import { Link } from "react-router-dom";
 import { useContextState } from "context";
-import profileImg from "Assets/profile.jpg";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -91,7 +90,7 @@ const Dot = styled.div`
 const Post = ({ post, saved }) => {
   // 카테고리 스테이트와 포스트스테이트의 카테고리 값이 같은지 비교후 적용시킴
   // : 카테고리 수정시 동기화가 안되기에 이렇게 설정함.
-  const { categories } = useContextState();
+  const { categories, profile } = useContextState();
   const category = categories.find((c) =>
     post ? c.item === post.category : saved ? c.item === saved.category : null
   );
@@ -124,8 +123,8 @@ const Post = ({ post, saved }) => {
     <Container>
       <PostHead>
         <NickColumn>
-          <img className="nick-img" src={profileImg} alt="PROFILE" />
-          <Nick>URE</Nick>
+          <img className="nick-img" src={profile.profileImg} alt="PROFILE" />
+          <Nick>{profile.nickName}</Nick>
           <Date>
             {post && post.date}
             {saved && saved.date}

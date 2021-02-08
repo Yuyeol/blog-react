@@ -1,10 +1,10 @@
 import { ImCog } from "react-icons/im";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import profileImg from "Assets/profile.jpg";
 import { BLACK } from "styles";
+import { useContextState } from "context";
 
-const Profile = styled.div`
+const Container = styled.div`
   border-bottom: 1.5px solid #f4efea;
   border: 2px solid #f4efea;
 `;
@@ -44,28 +44,27 @@ const Intro = styled.div`
 `;
 const SLink = styled(Link)``;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => (
-  <Profile>
-    <PictureBox>
-      <img className="picture" src={profileImg} alt="PROFILE" />
-    </PictureBox>
-    <Info>
-      <NicknameBox>
-        <Nickname>URE</Nickname>
-        <SLink to="/settings">
-          <EditProfile>
-            <ImCog />
-          </EditProfile>
-        </SLink>
-      </NicknameBox>
-      <Intro>
-        URE의 블로그입니다.
-        <br />
-        URE의 블로그입니다.
-        <br />
-        ...더보기 기능 추가
-      </Intro>
-    </Info>
-  </Profile>
-);
+const Profile = () => {
+  const { profile } = useContextState();
+
+  return (
+    <Container>
+      <PictureBox>
+        <img className="picture" src={profile.profileImg} alt="PROFILE" />
+      </PictureBox>
+      <Info>
+        <NicknameBox>
+          <Nickname>{profile.nickName}</Nickname>
+          <SLink to="/settings">
+            <EditProfile>
+              <ImCog />
+            </EditProfile>
+          </SLink>
+        </NicknameBox>
+        <Intro>{profile.introduce}</Intro>
+      </Info>
+    </Container>
+  );
+};
+
+export default Profile;

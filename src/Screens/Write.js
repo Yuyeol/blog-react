@@ -67,7 +67,6 @@ const Write = ({
       ? c.item === findSaved.category
       : null
   );
-  console.log(findCategory);
   // const findSavedCategory = categories.find(
   //   (c) => c.item === findSaved.category
   // );

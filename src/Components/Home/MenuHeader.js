@@ -6,12 +6,12 @@ import { BLACK, PINK, RED } from "styles";
 
 const Container = styled.div`
   background-color: white;
+  width: 1000px;
   height: 120px;
-  margin: 0px 140px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 8px 10px;
+  padding: 8px 15px;
 `;
 
 const MenuBox = styled.div`

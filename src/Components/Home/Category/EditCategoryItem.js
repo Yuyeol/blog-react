@@ -17,6 +17,9 @@ const Container = styled.div`
       width: 100%;
       border: none;
       width: 150px;
+      &:focus {
+        outline: none;
+      }
     }
     .edit-block {
       display: flex;

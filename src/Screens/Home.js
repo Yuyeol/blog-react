@@ -7,12 +7,19 @@ import TopList from "Components/Home/TopList";
 import Category from "Components/Home/Category/Category";
 
 const Container = styled.div`
-  margin: 0px 140px;
-  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Main = styled.div`
+  padding: 0px 15px;
   background-color: white;
   display: flex;
   position: relative;
   background-color: white;
+  width: 1000px;
+  height: 100vh;
 `;
 
 const PostBox = styled.div`
@@ -30,9 +37,9 @@ const Home = ({
   const filterPosts = posts.filter((p) => id === p.category);
 
   return (
-    <>
+    <Container>
       <MenuHeader />
-      <Container>
+      <Main>
         <Category />
         <PostBox>
           <TopList />
@@ -47,8 +54,8 @@ const Home = ({
             // 나중에 notfound 디자인해서 넣을거임 지금은 귀찮아서....
           }
         </PostBox>
-      </Container>
-    </>
+      </Main>
+    </Container>
   );
 };
 export default Home;
