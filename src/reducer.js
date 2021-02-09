@@ -11,6 +11,8 @@ export const CATEGORY_C = "category_create";
 export const CATEGORY_U = "category_update";
 export const CATEGORY_D = "category_delete";
 export const PROFILE_U = "profile_update";
+export const COMMENT_C = "comment_create";
+export const COMMENT_D = "comment_delete";
 
 export const initialState = {
   profile: {
@@ -30,7 +32,20 @@ export const initialState = {
       title: "첫번째",
       contents: "contents",
       like: 0,
-      comments: 0,
+      comments: [
+        {
+          id: uuid(),
+          writer: "URE",
+          comment: "안녕",
+          date: moment().format("lll"),
+        },
+        {
+          id: uuid(),
+          writer: "URE",
+          comment: "사요나라",
+          date: moment().format("lll"),
+        },
+      ],
       category: "Sample 1",
     },
   ],
@@ -73,7 +88,7 @@ const reducer = (state, action) => {
             contents: action.payload.contents,
             date: moment().format("lll"),
             like: 0,
-            comments: 0,
+            comments: [],
             category: action.payload.category,
           },
         ],
@@ -130,7 +145,7 @@ const reducer = (state, action) => {
             contents: action.payload.contents,
             date: moment().format("lll"),
             like: 0,
-            comments: 0,
+            comments: [],
             category: action.payload.category,
           },
         ],
@@ -163,6 +178,52 @@ const reducer = (state, action) => {
           nickName: action.payload.nickName,
           introduce: action.payload.introduce,
         },
+      };
+    case COMMENT_C:
+      const notUpdatedPo = state.posts.filter(
+        (post) => post.id !== action.payload.id
+      );
+      const updatedPo = state.posts.find(
+        (post) => post.id === action.payload.id
+      );
+      console.log(updatedPo);
+      return {
+        ...state,
+        posts: [
+          ...notUpdatedPo,
+          {
+            ...updatedPo,
+            comments: [
+              ...updatedPo.comments,
+              {
+                id: uuid(),
+                writer: "URE",
+                comment: action.payload.inputCo,
+                date: moment().format("lll"),
+              },
+            ],
+          },
+        ],
+      };
+    case COMMENT_D:
+      const notUpdatedPost = state.posts.filter(
+        (post) => post.id !== action.payload.pId
+      );
+      const updatedPost = state.posts.find(
+        (post) => post.id === action.payload.pId
+      );
+      console.log(updatedPost);
+      return {
+        ...state,
+        posts: [
+          ...notUpdatedPost,
+          {
+            ...updatedPost,
+            comments: updatedPost.comments.filter(
+              (c) => c.id !== action.payload.cId
+            ),
+          },
+        ],
       };
     default:
       return;

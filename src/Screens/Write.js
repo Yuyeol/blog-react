@@ -170,7 +170,7 @@ const Write = ({
       />
       <TitleBox>
         <Categories onClick={toggleCategories} ref={categoriesRef}>
-          {findCategory ? findCategory.item : "카테고리"}
+          {category ? category : "카테고리"}
           <AiFillCaretDown />
         </Categories>
         {categoryOpen && <SelectCategories handleCategory={handleCategory} />}

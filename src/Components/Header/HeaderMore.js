@@ -35,9 +35,6 @@ const HeaderMore = () => {
       <MoreLink to="/settings">
         <MoreItem>설정</MoreItem>
       </MoreLink>
-      <MoreLink to="/write">
-        <MoreItem>로그아웃</MoreItem>
-      </MoreLink>
     </MoreList>
   );
 };

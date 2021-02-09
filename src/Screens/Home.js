@@ -19,7 +19,7 @@ const Main = styled.div`
   position: relative;
   background-color: white;
   width: 1000px;
-  height: 100vh;
+  height: 100%;
 `;
 
 const PostBox = styled.div`

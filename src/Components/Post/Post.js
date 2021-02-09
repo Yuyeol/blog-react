@@ -46,7 +46,7 @@ const MoreBox = styled.div`
   svg {
     &:hover {
       color: ${BLACK};
-      transition: background-color 0.2s ease-in-out;
+      transition: color 0.2s ease-in-out;
     }
   }
 `;
@@ -73,13 +73,14 @@ const Contents = styled.div`
 const StatusBox = styled.div`
   margin-top: 15px;
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
 `;
 const StatusIcon = styled.div`
   font-size: 24px;
   margin-right: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const Like = styled.div``;
 const Comments = styled.div``;
@@ -170,16 +171,16 @@ const Post = ({ post, saved }) => {
           <StatusIcon onClick={handleComment}>
             <FaRegComment />
           </StatusIcon>
-          <Like>
-            {post && post.like > 0 && `좋아요 ${post && post.like}개`}
-          </Like>
-          <Dot>{post && post.like && post && post.comments ? "•" : ""}</Dot>
+          <Like>{heart && `좋아요 1개`}</Like>
+          {post && heart && post.comments.length > 0 && <Dot>•</Dot>}
           <Comments>
-            {post && post.comments > 0 && `댓글 ${post && post.comments}개`}
+            {post &&
+              post.comments.length > 0 &&
+              `댓글 ${post && post.comments.length}개`}
           </Comments>
         </StatusBox>
       )}
-      {openComment && <Comment />}
+      {openComment && <Comment post={post} />}
     </Container>
   );
 };
