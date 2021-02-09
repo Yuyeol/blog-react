@@ -94,11 +94,13 @@ const Container = styled.div`
       }
       .submit {
         margin-right: 30px;
-        background: linear-gradient(to top, ${RED}, #d2434d);
+        background: ${RED};
         color: ${PINK};
+        box-shadow: 4px 4px 4px rgba(84, 84, 86, 0.15);
       }
       .cancel {
-        background: linear-gradient(to top, #e2dedb, ${PINK});
+        background: ${PINK};
+        box-shadow: 4px 4px 4px rgba(84, 84, 86, 0.15);
       }
     }
   }

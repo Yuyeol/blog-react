@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { BLACK } from "styles";
+import { BLACK, PINK } from "styles";
 import HeaderMore from "./HeaderMore";
 import logoImg from "Assets/logo.png";
 import { useContextState } from "context";
@@ -13,7 +13,7 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   padding: 15px 30px;
-  box-shadow: 2px 5px 5px #f4efea;
+  box-shadow: 2px 5px 5px ${PINK};
   background-color: rgba(255, 255, 255, 0.8);
   display: ${(props) => (props.active ? "flex" : "none")};
   align-items: center;

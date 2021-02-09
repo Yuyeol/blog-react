@@ -9,8 +9,8 @@ const Write = styled.div`
   justify-content: center;
   text-align: center;
   color: ${PINK};
-  background: linear-gradient(to top, ${RED}, #d2434d);
-  box-shadow: 2px 2px 2px 2px #f4efea;
+  background: ${RED};
+  box-shadow: 4px 4px 4px rgba(84, 84, 86, 0.15);
   padding: 10px 0px;
   border-radius: 10px;
   font-weight: 600;

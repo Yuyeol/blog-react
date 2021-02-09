@@ -59,14 +59,19 @@ const Comment = ({ post }) => {
   };
   const handleSubmitCo = () => {
     dispatch({ type: COMMENT_C, payload: { inputCo, id: post.id } });
+    setInputCo("");
   };
   return (
     <Container>
-      <CommentsBox>
-        {post.comments.map((c) => (
-          <CommentItem key={c.id} comment={c} post={post} />
-        ))}
-      </CommentsBox>
+      {post.comments.length === 0 ? (
+        <div className="blank"></div>
+      ) : (
+        <CommentsBox>
+          {post.comments.map((c) => (
+            <CommentItem key={c.id} comment={c} post={post} />
+          ))}
+        </CommentsBox>
+      )}
       <InputBox>
         <div className="nick">
           <img src={profile.profileImg} alt="PROFILE" />
@@ -76,6 +81,7 @@ const Comment = ({ post }) => {
           <textarea
             className="comment-input"
             placeholder="댓글을 입력해보세요!"
+            value={inputCo}
             onChange={handleInputCo}
           />
           <div className="submit-box">

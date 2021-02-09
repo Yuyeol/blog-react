@@ -22,31 +22,31 @@ const PostHead = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-`;
-const NickColumn = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  .nick-img {
-    width: 32px;
-    border-radius: 15px;
+  .nick-column {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    .nick-img {
+      width: 32px;
+      border-radius: 15px;
+    }
+    .nick {
+      margin: 0 10px;
+    }
+    .date {
+      font-size: 16px;
+      color: grey;
+    }
   }
-`;
-const Nick = styled.div`
-  margin: 0 10px;
-`;
-const Date = styled.div`
-  font-size: 16px;
-  color: grey;
-`;
-const MoreBox = styled.div`
-  font-size: 24px;
-  color: grey;
-  cursor: pointer;
-  svg {
-    &:hover {
-      color: ${BLACK};
-      transition: color 0.2s ease-in-out;
+  .more-box {
+    font-size: 24px;
+    color: grey;
+    cursor: pointer;
+    svg {
+      &:hover {
+        color: ${BLACK};
+        transition: color 0.2s ease-in-out;
+      }
     }
   }
 `;
@@ -54,9 +54,9 @@ const TitleBox = styled.div`
   margin: 15px 0;
   font-size: 24px;
   display: flex;
-`;
-const Category = styled.div`
-  color: grey;
+  .category {
+    color: grey;
+  }
 `;
 const Bar = styled.div`
   color: lightgrey;
@@ -72,22 +72,26 @@ const Contents = styled.div`
 `;
 const StatusBox = styled.div`
   margin-top: 15px;
-  display: flex;
   font-size: 16px;
+  .icon-box {
+    margin-top: 8px;
+    display: flex;
+    .icon {
+      font-size: 24px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+  .status {
+    display: flex;
+  }
+  .dot {
+    padding: 0 8px;
+    color: grey;
+  }
 `;
-const StatusIcon = styled.div`
-  font-size: 24px;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-const Like = styled.div``;
-const Comments = styled.div``;
-const Dot = styled.div`
-  padding: 0 8px;
-`;
-
 const Post = ({ post, saved }) => {
   // 카테고리 스테이트와 포스트스테이트의 카테고리 값이 같은지 비교후 적용시킴
   // : 카테고리 수정시 동기화가 안되기에 이렇게 설정함.
@@ -123,34 +127,34 @@ const Post = ({ post, saved }) => {
   return (
     <Container>
       <PostHead>
-        <NickColumn>
+        <div className="nick-column">
           <img className="nick-img" src={profile.profileImg} alt="PROFILE" />
-          <Nick>{profile.nickName}</Nick>
-          <Date>
+          <div className="nick">{profile.nickName}</div>
+          <div className="date">
             {post && post.date}
             {saved && saved.date}
-          </Date>
-        </NickColumn>
-        <MoreBox onClick={toggleMore} ref={more}>
+          </div>
+        </div>
+        <div className="more-box" onClick={toggleMore} ref={more}>
           <BsThreeDots />
           {/* 수정, 삭제하는곳 */}
           {moreOpen && (
             <PostMore id={(post && post.id) || (saved && saved.id)} />
           )}
-        </MoreBox>
+        </div>
       </PostHead>
       <TitleBox>
         {post && post.category && (
           <>
             <Link to={`/post/${post.category}`}>
-              <Category>{category && category.item}</Category>
+              <div className="category">{category && category.item}</div>
             </Link>
             {category && <Bar>I</Bar>}
           </>
         )}
         {saved && saved.category && (
           <>
-            <Category>{category && category.item}</Category>
+            <div className="category">{category && category.item}</div>
             {category && <Bar>I</Bar>}
           </>
         )}
@@ -163,23 +167,27 @@ const Post = ({ post, saved }) => {
         {post && HTMLReactParser(post.contents)}
         {saved && HTMLReactParser(saved.contents)}
       </Contents>
-      {post && post && (
-        <StatusBox>
-          <StatusIcon onClick={handleHeart}>
-            {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
-          </StatusIcon>
-          <StatusIcon onClick={handleComment}>
-            <FaRegComment />
-          </StatusIcon>
-          <Like>{heart && `좋아요 1개`}</Like>
-          {post && heart && post.comments.length > 0 && <Dot>•</Dot>}
-          <Comments>
+      <StatusBox>
+        <div className="status">
+          <div className="like">{heart && `좋아요 1개`}</div>
+          {post && heart && post.comments.length > 0 && (
+            <div className="dot">•</div>
+          )}
+          <div className="comment">
             {post &&
               post.comments.length > 0 &&
               `댓글 ${post && post.comments.length}개`}
-          </Comments>
-        </StatusBox>
-      )}
+          </div>
+        </div>
+        <div className="icon-box">
+          <div className="icon" onClick={handleHeart}>
+            {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
+          </div>
+          <div className="icon" onClick={handleComment}>
+            <FaRegComment />
+          </div>
+        </div>
+      </StatusBox>
       {openComment && <Comment post={post} />}
     </Container>
   );

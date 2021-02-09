@@ -53,23 +53,13 @@ const Write = ({
     params: { id },
   },
 }) => {
-  const { posts, saved, categories } = useContextState();
+  const { posts, saved } = useContextState();
   const dispatch = useContextDispatch();
   const editorRef = useRef(null);
 
   // 수정하기에 해당되는 포스트 가져오기
   const findPost = posts.find((p) => p.id === id);
   const findSaved = saved.find((s) => s.id === id);
-  const findCategory = categories.find((c) =>
-    findPost
-      ? c.item === findPost.category
-      : findSaved
-      ? c.item === findSaved.category
-      : null
-  );
-  // const findSavedCategory = categories.find(
-  //   (c) => c.item === findSaved.category
-  // );
 
   //포스트 종류 구분하여 데이터 받아오기 : title
   const [title, setTitle] = useState(

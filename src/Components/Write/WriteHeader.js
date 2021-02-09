@@ -25,7 +25,8 @@ const ExitLabel = styled.div`
 `;
 const SaveLabel = styled.label`
   margin-left: 15px;
-  background: linear-gradient(to top, #e2dedb, ${PINK});
+  background: ${PINK};
+  box-shadow: 4px 4px 4px rgba(84, 84, 86, 0.15);
   color: rgb(16, 24, 32);
   padding: 10px 20px;
   border-radius: 100px;
@@ -34,7 +35,8 @@ const SaveLabel = styled.label`
 `;
 const PublishLabel = styled.label`
   margin-left: 15px;
-  background: linear-gradient(to top, ${RED}, #d2434d);
+  background: ${RED};
+  box-shadow: 4px 4px 4px rgba(84, 84, 86, 0.15);
   color: white;
   padding: 10px 20px;
   border-radius: 100px;
