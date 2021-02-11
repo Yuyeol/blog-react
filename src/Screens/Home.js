@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { useContextState } from "context";
 import Post from "Components/Post/Post";
 import BlankBoard from "Components/Post/BlankBoard";
-import MenuHeader from "Components/Home/MenuHeader";
-import TopList from "Components/Home/TopList";
 import Category from "Components/Home/Category/Category";
+import Pagination from "Components/Pagination/Pagination";
+import { useRef, useState } from "react";
+import MenuBar from "Components/TopMenu/MenuBar";
+import TopListBar from "Components/Home/TopList/TopListBar";
 
 const Container = styled.div`
   display: flex;
@@ -34,25 +36,43 @@ const Home = ({
   },
 }) => {
   const { posts } = useContextState();
+  // 페이지 계산공식
+  const [currentPage, setCurrentPagen] = useState(1);
+  const postsPerPage = useRef(3);
+  const indexOfLastPost = currentPage * postsPerPage.current;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage.current;
+  const currentPosts = posts.reverse().slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNum) => {
+    setCurrentPagen(pageNum);
+  };
+  // 카테고리별 포스트 필터링
   const filterPosts = posts.filter((p) => id === p.category);
-
   return (
     <Container>
-      <MenuHeader />
+      <MenuBar />
       <Main>
         <Category />
         <PostBox>
-          <TopList />
+          <TopListBar />
           {
             posts.length === 0 ? (
               <BlankBoard />
             ) : url === "/" ? (
-              posts.map((p) => <Post key={p.id} post={p} />)
+              currentPosts.map((p) => <Post key={p.id} post={p} />)
             ) : url.includes("post") ? (
+              // 카테고리별 페이지
               filterPosts.map((p) => <Post key={p.id} post={p} />)
             ) : null
             // 나중에 notfound 디자인해서 넣을거임 지금은 귀찮아서....
           }
+          {posts.length > 0 && (
+            <Pagination
+              postsPerPage={postsPerPage.current}
+              postsNum={posts.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          )}
         </PostBox>
       </Main>
     </Container>

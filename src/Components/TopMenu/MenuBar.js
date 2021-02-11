@@ -48,7 +48,7 @@ const RedLine = styled.div`
 
 const MenuLink = styled(Link)``;
 
-const MenuHeader = () => {
+const MenuBar = () => {
   const { saved } = useContextState();
   return (
     <Container>
@@ -69,4 +69,4 @@ const MenuHeader = () => {
   );
 };
 
-export default MenuHeader;
+export default MenuBar;

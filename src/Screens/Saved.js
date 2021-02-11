@@ -1,11 +1,12 @@
-import MenuHeader from "Components/Home/MenuHeader";
 import BlankBoard from "Components/Post/BlankBoard";
 import Post from "Components/Post/Post";
 import { useContextState } from "context";
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import TopList from "Components/Home/TopList";
 import Category from "Components/Home/Category/Category";
+import Pagination from "Components/Pagination/Pagination";
+import MenuBar from "Components/TopMenu/MenuBar";
+import TopListBar from "Components/Home/TopList/TopListBar";
 
 const Container = styled.div`
   display: flex;
@@ -14,12 +15,13 @@ const Container = styled.div`
 `;
 
 const Main = styled.div`
-  padding: 0 15px;
+  padding: 0px 15px;
   background-color: white;
   display: flex;
   position: relative;
-  width: 1000px;
   background-color: white;
+  width: 1000px;
+  height: 100%;
 `;
 const PostBox = styled.div`
   width: 100%;
@@ -28,17 +30,34 @@ const PostBox = styled.div`
 
 const Saved = () => {
   const { saved } = useContextState();
+  // 페이지 계산공식
+  const [currentPage, setCurrentPagen] = useState(1);
+  const postsPerPage = useRef(3);
+  const indexOfLastPost = currentPage * postsPerPage.current;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage.current;
+  const currentSaved = saved.reverse().slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNum) => {
+    setCurrentPagen(pageNum);
+  };
   return (
     <Container>
-      <MenuHeader />
+      <MenuBar />
       <Main>
         <Category />
         <PostBox>
-          <TopList />
+          <TopListBar />
           {saved.length === 0 ? (
             <BlankBoard />
           ) : (
-            saved.map((s) => <Post key={s.id} saved={s} />)
+            currentSaved.map((s) => <Post key={s.id} saved={s} />)
+          )}
+          {saved.length > 0 && (
+            <Pagination
+              postsPerPage={postsPerPage.current}
+              postsNum={saved.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
           )}
         </PostBox>
       </Main>

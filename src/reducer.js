@@ -31,6 +31,7 @@ export const initialState = {
       id: uuid(),
       title: "첫번째",
       contents: "contents",
+      date: moment().format("lll"),
       like: 0,
       comments: [
         {
@@ -42,7 +43,7 @@ export const initialState = {
         {
           id: uuid(),
           writer: "URE",
-          comment: "사요나라",
+          comment: "아니",
           date: moment().format("lll"),
         },
       ],
