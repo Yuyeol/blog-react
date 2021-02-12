@@ -47,13 +47,16 @@ const Home = ({
   };
   // 카테고리별 포스트 필터링
   const filterPosts = posts.filter((p) => id === p.category);
+  // 탑리스트에서 클릭된 단일포스트 찾기
+  const findPosts = posts.find((p) => id === p.id);
+
   return (
     <Container>
       <MenuBar />
       <Main>
         <Category />
         <PostBox>
-          <TopListBar />
+          {!url.includes("pdetail") && <TopListBar />}
           {
             posts.length === 0 ? (
               <BlankBoard />
@@ -62,10 +65,12 @@ const Home = ({
             ) : url.includes("post") ? (
               // 카테고리별 페이지
               filterPosts.map((p) => <Post key={p.id} post={p} />)
+            ) : url.includes("pdetail") ? (
+              <Post post={findPosts} />
             ) : null
             // 나중에 notfound 디자인해서 넣을거임 지금은 귀찮아서....
           }
-          {posts.length > 0 && (
+          {url === "/" && posts.length > 0 && (
             <Pagination
               postsPerPage={postsPerPage.current}
               postsNum={posts.length}

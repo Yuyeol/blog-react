@@ -1,6 +1,6 @@
 import { useContextState } from "context";
 import React, { useState } from "react";
-import { AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { BLACK, PINK } from "styles";
@@ -64,7 +64,9 @@ const TopListBar = ({
               ? "전체보기"
               : path === "/saved"
               ? "임시 저장함"
-              : `${id}`}
+              : path.includes("post")
+              ? `${id}`
+              : null}
           </div>
           <div className="post-num">
             {path === "/"
@@ -78,8 +80,8 @@ const TopListBar = ({
           </div>
         </div>
         <div className="second-column" onClick={handleList}>
-          목록열기
-          <AiFillCaretDown />
+          목록
+          {toggleList ? <AiFillCaretUp /> : <AiFillCaretDown />}
         </div>
       </div>
       {toggleList && (

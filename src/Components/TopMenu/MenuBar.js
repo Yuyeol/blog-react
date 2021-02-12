@@ -1,5 +1,6 @@
 import { useContextState } from "context";
 import React from "react";
+import { HiOutlineHome } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BLACK, PINK, RED } from "styles";
@@ -20,19 +21,18 @@ const MenuBox = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  & div:hover {
+  & span:hover {
     color: ${BLACK};
     transition: color 0.5s ease;
   }
-`;
-
-const MenuColumn = styled.div`
-  display: flex;
-  padding: 5px 0;
-  span {
-    &:nth-child(2) {
-      margin: 0 4px;
-      color: ${PINK};
+  .menu-column {
+    display: flex;
+    padding: 5px 0;
+    span {
+      &:nth-child(2) {
+        margin: 0 4px;
+        color: ${PINK};
+      }
     }
   }
 `;
@@ -46,23 +46,28 @@ const RedLine = styled.div`
   left: 0;
 `;
 
-const MenuLink = styled(Link)``;
-
 const MenuBar = () => {
   const { saved } = useContextState();
   return (
     <Container>
       <MenuBox>
-        <MenuColumn>전체메뉴</MenuColumn>
-        <MenuColumn>
-          <MenuLink to="/saved">
+        <div className="menu-column">
+          <Link to="/">
+            <span>
+              <HiOutlineHome />
+              홈으로
+            </span>
+          </Link>
+        </div>
+        <div className="menu-column">
+          <Link to="/saved">
             <span>임시저장함 ({saved.length})</span>
-          </MenuLink>
+          </Link>
           <span>I</span>
-          <MenuLink to="/settings">
+          <Link to="/settings">
             <span>설정</span>
-          </MenuLink>
-        </MenuColumn>
+          </Link>
+        </div>
       </MenuBox>
       <RedLine></RedLine>
     </Container>

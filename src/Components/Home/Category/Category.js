@@ -47,7 +47,9 @@ const Title = styled.div`
   div:last-child {
     margin-left: 5px;
     font-size: 14px;
-    background: linear-gradient(to top, #e2dedb, ${PINK});
+    background: ${PINK};
+    box-shadow: 1.5px 1.5px 1.5px rgba(84, 84, 86, 0.15);
+
     color: ${BLACK};
     border-radius: 7px;
     padding: 0 5px;

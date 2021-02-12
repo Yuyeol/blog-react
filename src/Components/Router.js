@@ -13,9 +13,11 @@ export default () => {
       <Header />
       <Route path="/" exact component={Home} />
       <Route path="/post/:id" exact component={Home} />
+      <Route path="/pdetail/:id" exact component={Home} />
       <Route path="/write" exact component={Write} />
       <Route path="/write/:id" exact component={Write} />
       <Route path="/saved" exact component={Saved} />
+      <Route path="/sdetail/:id" exact component={Saved} />
       <Route path="/settings" exact component={Settings} />
     </Router>
   );

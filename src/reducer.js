@@ -22,9 +22,9 @@ export const initialState = {
     introduce: "URE의 블로그입니다.",
   },
   categories: [
-    { id: uuid(), item: "Sample 1" },
-    { id: uuid(), item: "Sample 2" },
-    { id: uuid(), item: "Sample 3" },
+    { id: uuid(), item: "온라인게임" },
+    { id: uuid(), item: "해외주식" },
+    { id: uuid(), item: "버킷리스트" },
   ],
   posts: [
     {
@@ -47,7 +47,7 @@ export const initialState = {
           date: moment().format("lll"),
         },
       ],
-      category: "Sample 1",
+      category: "온라인게임",
     },
   ],
   saved: [
@@ -56,7 +56,7 @@ export const initialState = {
       title: "첫번째",
       contents: "contents",
       date: moment().format("lll"),
-      category: "Sample 1",
+      category: "온라인게임",
     },
     // {
     //   id: uuid(),

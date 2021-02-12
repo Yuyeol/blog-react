@@ -1,7 +1,8 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled(Link)`
   display: flex;
   justify-content: space-between;
   padding: 10px 5px;
@@ -16,9 +17,12 @@ const Container = styled.div`
   }
 `;
 
-const TopListItem = ({ post: { category, title, date } }) => {
+const TopListItem = ({
+  match: { path },
+  post: { category, title, date, id },
+}) => {
   return (
-    <Container>
+    <Container to={path === "/" ? `/pdetail/${id}` : `/sdetail/${id}`}>
       <div className="title">
         <span>{category}</span>
         {category && <span className="partition">I</span>}
@@ -29,4 +33,4 @@ const TopListItem = ({ post: { category, title, date } }) => {
   );
 };
 
-export default TopListItem;
+export default withRouter(TopListItem);

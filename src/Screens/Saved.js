@@ -28,7 +28,12 @@ const PostBox = styled.div`
   height: 100%;
 `;
 
-const Saved = () => {
+const Saved = ({
+  match: {
+    url,
+    params: { id },
+  },
+}) => {
   const { saved } = useContextState();
   // 페이지 계산공식
   const [currentPage, setCurrentPagen] = useState(1);
@@ -39,19 +44,22 @@ const Saved = () => {
   const paginate = (pageNum) => {
     setCurrentPagen(pageNum);
   };
+  const findSaved = saved.find((s) => id === s.id);
   return (
     <Container>
       <MenuBar />
       <Main>
         <Category />
         <PostBox>
-          <TopListBar />
+          {!url.includes("sdetail") && <TopListBar />}
           {saved.length === 0 ? (
             <BlankBoard />
-          ) : (
+          ) : url === "/saved" ? (
             currentSaved.map((s) => <Post key={s.id} saved={s} />)
-          )}
-          {saved.length > 0 && (
+          ) : url.includes("sdetail") ? (
+            <Post saved={findSaved} />
+          ) : null}
+          {url === "/saved" && saved.length > 0 && (
             <Pagination
               postsPerPage={postsPerPage.current}
               postsNum={saved.length}
