@@ -55,6 +55,7 @@ const WriteHeader = ({ history, handleSubmit, handleSave, findPost }) => {
   const handleExit = () => {
     history.goBack();
   };
+
   return (
     <Container>
       <Exit onClick={handleExit}>

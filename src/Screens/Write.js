@@ -49,6 +49,7 @@ const Bar = styled.div`
   margin: 0 7px;
 `;
 const Write = ({
+  history,
   match: {
     params: { id },
   },
@@ -104,6 +105,7 @@ const Write = ({
         });
       }
     }
+    history.goBack();
   };
   // 임시저장 버튼
   const handleSave = () => {
@@ -120,6 +122,7 @@ const Write = ({
         payload: { title, contents, category },
       });
     }
+    history.goBack();
   };
 
   // 입력시 스테이트에 저장

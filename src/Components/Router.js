@@ -5,6 +5,7 @@ import Settings from "Screens/Settings";
 import Home from "Screens/Home";
 import Header from "./Header/Header";
 import Saved from "Screens/Saved";
+import Footer from "./Footer/Footer";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -19,6 +20,7 @@ export default () => {
       <Route path="/saved" exact component={Saved} />
       <Route path="/sdetail/:id" exact component={Saved} />
       <Route path="/settings" exact component={Settings} />
+      <Footer />
     </Router>
   );
 };

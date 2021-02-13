@@ -51,6 +51,8 @@ const PostHead = styled.div`
   }
 `;
 const TitleBox = styled.div`
+  width: 100%;
+  word-break: break-all;
   margin: 15px 0;
   font-size: 24px;
   display: flex;
@@ -66,6 +68,8 @@ const Title = styled.div`
   font-weight: 600;
 `;
 const Contents = styled.div`
+  width: 100%;
+  word-break: break-all;
   & img {
     width: 100%;
   }

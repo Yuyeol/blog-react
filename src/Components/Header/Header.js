@@ -37,8 +37,11 @@ const MoreBox = styled.div`
   color: grey;
   display: flex;
   align-items: center;
-
   cursor: pointer;
+  &:hover {
+    color: ${BLACK};
+    transition: background-color 0.2s ease-in-out;
+  }
   .user {
     width: 40px;
     height: 40px;

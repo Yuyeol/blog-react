@@ -22,42 +22,42 @@ export const initialState = {
     introduce: "URE의 블로그입니다.",
   },
   categories: [
-    { id: uuid(), item: "온라인게임" },
-    { id: uuid(), item: "해외주식" },
-    { id: uuid(), item: "버킷리스트" },
+    // { id: uuid(), item: "온라인게임" },
+    // { id: uuid(), item: "해외주식" },
+    // { id: uuid(), item: "버킷리스트" },
   ],
   posts: [
-    {
-      id: uuid(),
-      title: "첫번째",
-      contents: "contents",
-      date: moment().format("lll"),
-      like: 0,
-      comments: [
-        {
-          id: uuid(),
-          writer: "URE",
-          comment: "안녕",
-          date: moment().format("lll"),
-        },
-        {
-          id: uuid(),
-          writer: "URE",
-          comment: "아니",
-          date: moment().format("lll"),
-        },
-      ],
-      category: "온라인게임",
-    },
+    // {
+    //   id: uuid(),
+    //   title: "첫번째",
+    //   contents: "contents",
+    //   date: moment().format("lll"),
+    //   like: 0,
+    //   comments: [
+    //     {
+    //       id: uuid(),
+    //       writer: "URE",
+    //       comment: "안녕",
+    //       date: moment().format("lll"),
+    //     },
+    //     {
+    //       id: uuid(),
+    //       writer: "URE",
+    //       comment: "아니",
+    //       date: moment().format("lll"),
+    //     },
+    //   ],
+    //   category: "온라인게임",
+    // },
   ],
   saved: [
-    {
-      id: uuid(),
-      title: "첫번째",
-      contents: "contents",
-      date: moment().format("lll"),
-      category: "온라인게임",
-    },
+    // {
+    //   id: uuid(),
+    //   title: "첫번째",
+    //   contents: "contents",
+    //   date: moment().format("lll"),
+    //   category: "온라인게임",
+    // },
     // {
     //   id: uuid(),
     //   title: "1st",
