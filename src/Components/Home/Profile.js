@@ -7,18 +7,22 @@ import { useContextState } from "context";
 const Container = styled.div`
   border-bottom: 1.5px solid #f4efea;
   border: 2px solid #f4efea;
+  padding: 10px;
 `;
 const PictureBox = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 10px;
+  width: 195px;
+  height: 195px;
+  overflow: hidden;
+  background-color: ${BLACK};
   .picture {
-    width: 100%;
+    height: 195px;
   }
 `;
-const Info = styled.div`
-  padding: 0 10px;
-`;
+const Info = styled.div``;
 const NicknameBox = styled.div`
   display: flex;
   align-items: center;
@@ -40,7 +44,6 @@ const EditProfile = styled.div`
 `;
 const Intro = styled.div`
   line-height: 1.5;
-  padding: 10px 0;
 `;
 const SLink = styled(Link)``;
 

@@ -19,10 +19,19 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       font-size: 16px;
-      img {
+      .user-img-box {
         width: 20px;
-        border-radius: 10px;
+        height: 20px;
+        overflow: hidden;
+        background-color: ${BLACK};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
         margin-right: 5px;
+        img {
+          height: 20px;
+        }
       }
       .date {
         margin-left: 10px;
@@ -58,7 +67,9 @@ const CommentItem = ({
     <Container>
       <div className="user-box">
         <div className="user-profile">
-          <img src={profile.profileImg} alt="PROFILE" />
+          <div className="user-img-box">
+            <img src={profile.profileImg} alt="PROFILE" />
+          </div>
           {writer}
           <div className="date">{date}</div>
         </div>

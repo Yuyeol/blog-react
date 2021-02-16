@@ -22,9 +22,9 @@ export const initialState = {
     introduce: "URE의 블로그입니다.",
   },
   categories: [
-    // { id: uuid(), item: "온라인게임" },
-    // { id: uuid(), item: "해외주식" },
-    // { id: uuid(), item: "버킷리스트" },
+    { id: uuid(), item: "온라인게임" },
+    { id: uuid(), item: "해외주식" },
+    { id: uuid(), item: "버킷리스트" },
   ],
   posts: [
     // {

@@ -26,9 +26,18 @@ const PostHead = styled.div`
     display: flex;
     align-items: center;
     font-size: 24px;
-    .nick-img {
+    .nick-img-box {
       width: 32px;
-      border-radius: 15px;
+      height: 32px;
+      overflow: hidden;
+      background-color: ${BLACK};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+      .nick-img {
+        height: 32px;
+      }
     }
     .nick {
       margin: 0 10px;
@@ -132,7 +141,9 @@ const Post = ({ post, saved }) => {
     <Container>
       <PostHead>
         <div className="nick-column">
-          <img className="nick-img" src={profile.profileImg} alt="PROFILE" />
+          <div className="nick-img-box">
+            <img className="nick-img" src={profile.profileImg} alt="PROFILE" />
+          </div>
           <div className="nick">{profile.nickName}</div>
           <div className="date">
             {post && post.date}

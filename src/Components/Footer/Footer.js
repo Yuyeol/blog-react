@@ -8,7 +8,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   .text-box {
-    width: 1000px;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;

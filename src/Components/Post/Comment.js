@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PINK } from "styles";
+import { BLACK, PINK } from "styles";
 import { useContextDispatch, useContextState } from "context";
 import CommentItem from "./CommentItem";
 import { COMMENT_C } from "reducer";
@@ -22,10 +22,19 @@ const InputBox = styled.div`
     align-items: center;
     font-size: 20px;
     border-bottom: 1px solid ${PINK};
-    img {
+    .nick-img-box {
       width: 20px;
-      border-radius: 10px;
+      height: 20px;
+      overflow: hidden;
+      background-color: ${BLACK};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
       margin-right: 5px;
+      img {
+        height: 20px;
+      }
     }
   }
   .comment-input {
@@ -74,7 +83,9 @@ const Comment = ({ post }) => {
       )}
       <InputBox>
         <div className="nick">
-          <img src={profile.profileImg} alt="PROFILE" />
+          <div className="nick-img-box">
+            <img src={profile.profileImg} alt="PROFILE" />
+          </div>
           {profile.nickName}
         </div>
         <div className="comment-form">

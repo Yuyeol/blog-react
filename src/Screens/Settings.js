@@ -9,12 +9,11 @@ import { PROFILE_U } from "reducer";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-
   .edit-profile {
     background-color: white;
     width: 500px;
-    padding: 0 15px;
     .header {
+      padding: 0 15px;
       background-color: white;
       height: 120px;
       display: flex;
@@ -48,15 +47,19 @@ const Container = styled.div`
     }
 
     .edit {
+      background-color: white;
       margin-left: 30px;
       .title {
         margin-top: 25px;
         margin-bottom: 10px;
         font-size: 20px;
         font-weight: 600;
+        .star {
+          color: ${RED};
+        }
       }
       input {
-        width: 100%;
+        width: 93%;
         font-size: 20px;
         padding: 5px;
         border: 1px solid lightgrey;
@@ -65,7 +68,7 @@ const Container = styled.div`
         }
       }
       textarea {
-        width: 100%;
+        width: 93%;
         height: 80px;
         font-size: 20px;
         padding: 5px;
@@ -140,11 +143,15 @@ const Settings = ({ history }) => {
   };
 
   const handleEdit = () => {
-    dispatch({
-      type: PROFILE_U,
-      payload: { image, blogName, nickName, introduce },
-    });
-    history.goBack();
+    if (!blogName || !nickName) {
+      alert("입력되지 않은 정보가 있습니다.");
+    } else {
+      dispatch({
+        type: PROFILE_U,
+        payload: { image, blogName, nickName, introduce },
+      });
+      history.goBack();
+    }
   };
   const handleCancel = () => {
     history.goBack();
@@ -165,9 +172,13 @@ const Settings = ({ history }) => {
             handleImgChange={handleImgChange}
             image={image}
           />
-          <div className="title">블로그명</div>
+          <div className="title">
+            블로그명<span className="star">*</span>
+          </div>
           <input onChange={handleBlogName} value={blogName} maxLength="20" />
-          <div className="title">별명</div>
+          <div className="title">
+            별명<span className="star">*</span>
+          </div>
           <input onChange={handleNickName} value={nickName} maxLength="6" />
           <div className="title">소개글</div>
           <textarea

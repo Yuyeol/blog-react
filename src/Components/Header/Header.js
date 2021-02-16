@@ -42,11 +42,19 @@ const MoreBox = styled.div`
     color: ${BLACK};
     transition: background-color 0.2s ease-in-out;
   }
-  .user {
+  .img-box {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    overflow: hidden;
+    background-color: ${BLACK};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
     margin: 0 20px;
+    .user {
+      height: 40px;
+    }
   }
 `;
 const HomeLink = styled(Link)``;
@@ -77,7 +85,9 @@ const Header = ({ location: { pathname } }) => {
       </HomeLink>
       <Column>
         <MoreBox onClick={toggleMore} ref={more}>
-          <img className="user" src={profile.profileImg} alt="Profile" />
+          <div className="img-box">
+            <img className="user" src={profile.profileImg} alt="Profile" />
+          </div>
           <AiFillCaretDown />
           {moreOpen && <HeaderMore />}
         </MoreBox>

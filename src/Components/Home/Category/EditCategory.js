@@ -12,8 +12,8 @@ const Container = styled.div`
   width: 250px;
   height: 250px;
   padding: 10px;
-  top: 420px;
-  left: 140px;
+  top: 330px;
+  left: 145px;
   z-index: 1;
 
   .form-box {
@@ -58,10 +58,18 @@ const EditCategory = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({
-      type: CATEGORY_C,
-      payload: input,
-    });
+    const mapItem = categories.map((c) => c.item);
+    const findItem = mapItem.find((c) => c === input);
+    if (input === "") {
+      alert("카테고리명을 입력해주세요.");
+    } else if (!findItem) {
+      dispatch({
+        type: CATEGORY_C,
+        payload: input,
+      });
+    } else {
+      alert("카테고리명이 중복됩니다.");
+    }
     setInput("");
   };
 

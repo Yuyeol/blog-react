@@ -11,6 +11,7 @@ import WriteHeader from "Components/Write/WriteHeader";
 import SelectCategories from "Components/Write/SelectCategories";
 
 const Container = styled.div`
+  height: 100vh;
   padding: 100px;
   z-index: -1;
   background-color: white;
@@ -77,52 +78,60 @@ const Write = ({
 
   // 발행하기 버튼
   const handleSubmit = () => {
-    if (findPost) {
-      // Update Post
-      dispatch({
-        type: UPDATE,
-        payload: {
-          id,
-          title,
-          contents,
-          like: findPost.like,
-          comments: findPost.comments,
-          category,
-        },
-      });
-    } else {
-      // Publish Saved
-      if (findSaved) {
+    if (title) {
+      if (findPost) {
+        // Update Post
         dispatch({
-          type: COMPLETE,
-          payload: { id, title, contents, category },
+          type: UPDATE,
+          payload: {
+            id,
+            title,
+            contents,
+            like: findPost.like,
+            comments: findPost.comments,
+            category,
+          },
         });
-        // Publish Post
       } else {
-        dispatch({
-          type: CREATE,
-          payload: { title, contents, category },
-        });
+        // Publish Saved
+        if (findSaved) {
+          dispatch({
+            type: COMPLETE,
+            payload: { id, title, contents, category },
+          });
+          // Publish Post
+        } else {
+          dispatch({
+            type: CREATE,
+            payload: { title, contents, category },
+          });
+        }
       }
+      history.goBack();
+    } else if (!title) {
+      alert("제목을 입력해주세요.");
     }
-    history.goBack();
   };
   // 임시저장 버튼
   const handleSave = () => {
-    // Create SAVE
-    if (findSaved) {
-      dispatch({
-        type: SAVE,
-        payload: { title, contents, id, category },
-      });
-      // Update SAVE
-    } else {
-      dispatch({
-        type: SAVE,
-        payload: { title, contents, category },
-      });
+    if (title) {
+      // Create SAVE
+      if (findSaved) {
+        dispatch({
+          type: SAVE,
+          payload: { title, contents, id, category },
+        });
+        // Update SAVE
+      } else {
+        dispatch({
+          type: SAVE,
+          payload: { title, contents, category },
+        });
+      }
+      history.goBack();
+    } else if (!title) {
+      alert("제목을 입력해주세요.");
     }
-    history.goBack();
   };
 
   // 입력시 스테이트에 저장
