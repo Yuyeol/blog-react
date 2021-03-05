@@ -194,14 +194,16 @@ const Post = ({ post, saved }) => {
               `댓글 ${post && post.comments.length}개`}
           </div>
         </div>
-        <div className="icon-box">
-          <div className="icon" onClick={handleHeart}>
-            {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
+        {post && (
+          <div className="icon-box">
+            <div className="icon" onClick={handleHeart}>
+              {heart ? <FaHeart color="rgb(237, 73, 86)" /> : <FaRegHeart />}
+            </div>
+            <div className="icon" onClick={handleComment}>
+              <FaRegComment />
+            </div>
           </div>
-          <div className="icon" onClick={handleComment}>
-            <FaRegComment />
-          </div>
-        </div>
+        )}
       </StatusBox>
       {openComment && <Comment post={post} />}
     </Container>
